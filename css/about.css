@@ -66,7 +66,7 @@ header ul li{
 .about-t a
 {   display: block;
     font-size: 0.8rem;
-    margin-left: 5rem;
+    /* margin-left: 5rem; */
 }
 .about .t1{
 margin-bottom: 6rem;
@@ -86,6 +86,7 @@ margin-bottom: 6rem;
 .t3{
     position: absolute;
     left:40%;
+    bottom: 0;
 }
 @media(max-width:1700px){
 .t3{
@@ -130,5 +131,8 @@ header ul {
 @media (max-width:1024px){
       .t3{
     left:0;
+}
+.about h1 {
+    margin-bottom: 3rem;
 }
 }
