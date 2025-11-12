@@ -10,30 +10,32 @@ const textureCtx = textureEl.getContext("2d");
 // -------------------------------
 const fontOptions = {
   "Arial": "Arial, sans-serif",
+  'newyork':"newyork, serif",
   "Verdana": "Verdana, sans-serif",
   "Tahoma": "Tahoma, sans-serif",
   "Times New Roman": "Times New Roman, serif",
   "Georgia": "Georgia, serif",
   "Garamond": "Garamond, serif",
   "Courier New": "Courier New, monospace",
-  "Brush Script MT": "Brush Script MT, cursive"
+  "Brush Script MT": "Brush Script MT, cursive",
+  'zal': "zal, serif"
 };
 
 // -------------------------------
 // Params (반응형 옵션 추가)
 // -------------------------------
 const params = {
-  fontName: "Times New Roman",
+  fontName: 'zal',
   isBold: false,
-  fontSize: 80, // responsive=false일 때 수동 폰트
+  fontSize: 100, // responsive=false일 때 수동 폰트
   text: "Realize",
   pointerSize: null,
   color: { r: .2, g: .05, b: 1 },
 
   // ✅ Responsive font
   responsive: true,
-  minFont: 36,     // px (모바일 기준 최소)
-  maxFont: 220,    // px (데스크톱 기준 최대)
+  minFont: 40,     // px (모바일 기준 최소)
+  maxFont: 150,    // px (데스크톱 기준 최대)
   fromWidth: 360,  // 이 너비에서 minFont
   toWidth: 1440    // 이 너비에서 maxFont
 };
@@ -119,7 +121,7 @@ function updateTextCanvas() {
     (params.fontSize * devicePixelRatio) + "px " +
     fontOptions[params.fontName];
 
-  textureCtx.fillStyle = "#ffffff";
+  textureCtx.fillStyle = "#FFFBF3";
   textureCtx.textAlign = "center";
   textureCtx.filter = "blur(3px)";
 

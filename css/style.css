@@ -1,0 +1,91 @@
+html, body { height: 100%; margin: 0; }
+body{
+  font-size: 18px;
+} 
+.lil-gui { display: none !important; }
+/* 배경처럼 화면을 덮는 WebGL 캔버스 (뒤) */
+  canvas {
+    position: fixed;     /* 화면 고정 */
+    inset: 0;            /* top:0; right:0; bottom:0; left:0; */
+    width: 100%;
+    height: 100%;
+    z-index: 0;          /* 가장 뒤 */
+    display: block;
+  }
+
+  /* 위에 얹힐 텍스트 (앞) */
+  .overlay-contents {
+    height: 100%;
+    width: 100%;
+    position:fixed;     /* 스크롤해도 중앙 고정 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;         /* canvas보다 큼 */
+    color: #161616;
+    /* font-family: "Pretendard", "Inter", system-ui, -apple-system, sans-serif; */
+    pointer-events: none; /* 마우스는 여전히 canvas로 감 (필요시) */
+  }
+.txt {
+    padding: 4rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    /* justify-content: space-between; */
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+.name{
+    font-family: 'zal';
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+  .job{
+    display:flex ;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+.job{
+    font-family: 'zal';
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .ideas
+  {
+    font-family: 'newyork';
+    font-size: 2rem;
+    line-height: 0.8;
+  }
+.grow {
+    font-family: 'zal';
+    font-weight: 300;
+    font-size: 2rem;
+    line-height: 0.8;
+    margin-left: 3rem;
+}
+  .cre{
+    font-family: 'newyork';
+    font-size: 2rem;
+    line-height: 0.8;
+    margin-left: 8rem;
+  }
+  .slogan{
+    position: absolute;
+    bottom: 6rem;
+  }
+  .scroll{
+    width: 4rem;
+    position: absolute;
+    bottom: 6rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }

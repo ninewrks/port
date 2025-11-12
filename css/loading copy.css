@@ -1,10 +1,10 @@
  /* ===== Scroll-snap 컨테이너 ===== */
-  html,body{height:100%;margin:0}
+  html,body{margin:0}
   .snap{
-    height:100vh; width:100vw;
+    /* height:100%; width:100%; */
     overflow-y:auto;
     scroll-snap-type:y mandatory;
-    scroll-behavior:smooth;
+    scroll-behavior:smooth
   }
   section{
     height:100vh; scroll-snap-align:start;
@@ -13,8 +13,8 @@
 
   /* ===== 로딩 오버레이(네 로더 + 탄성 슬라이드 업) ===== */
   :root{
-    --deep-green:#00309f; --fg:#F2F5FA;
-    --size:49px; --bar-w:3px; --bar-h:18px; --delay-step:.2s;
+    --deep-green:#2935db; --fg:#FFFBF3;
+    --size:50px; --bar-w:3px; --bar-h:18px; --delay-step:.2s;
     --font: ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
   }
   #preloader{
@@ -61,7 +61,7 @@
   .loader span:nth-child(10) { --deg:270deg;  --d: calc( 9 * var(--delay-step)); }
   .loader span:nth-child(11) { --deg:300deg;  --d: calc(10 * var(--delay-step)); }
   .loader span:nth-child(12) { --deg:330deg;  --d: calc(11 * var(--delay-step)); }
-  .label{ margin-top:16px; text-align:center; font:600 14px/1 var(--font); color:var(--fg) }
+  .label{ margin-top:16px; text-align:center; font:400 14px/1 var(--font); color:var(--fg) }
 
   /* 데모용 임시 배경(파셜에서 덮어씀) */
 
