@@ -6,7 +6,7 @@ const view = document.getElementById("viewport");
 
 let n = 0;
 const timer = setInterval(()=>{
-  n += 10; if(n>100) n=100;
+  n += 1; if(n>100) n=100;
   pct.textContent = n + "%";
   if(n === 100){
     clearInterval(timer);
@@ -19,7 +19,7 @@ const timer = setInterval(()=>{
       }, { once:true });
     });
   }
-}, 220);
+}, 30);
 
 /* 첫 섹션(인트로)만 선로드 → 전환 매끈 */
 async function preloadFirst(){

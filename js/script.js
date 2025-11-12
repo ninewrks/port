@@ -28,10 +28,9 @@ const params = {
   fontName: 'zal',
   isBold: false,
   fontSize: 100, // responsive=false일 때 수동 폰트
-  text: "Realize",
+  text: "Essence",
   pointerSize: null,
-  color: { r: .2, g: .05, b: 1 },
-
+  color: { r: .32, g: .5, b: 1 },
   // ✅ Responsive font
   responsive: true,
   minFont: 40,     // px (모바일 기준 최소)

@@ -12,12 +12,12 @@
 
 <!-- 로딩 오버레이 -->
 <div id="preloader" aria-live="polite">
-  <div>
+  <div class="positon">
     <div class="loader" aria-hidden="true">
       <span></span><span></span><span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span><span></span><span></span>
     </div>
-    <div class="label">Loading&nbsp;<span id="percent">0%</span></div>
+    <div class="label"><p>Loading&nbsp;<span id="percent">0%</span></p></div>
   </div>
 </div>
 
@@ -26,8 +26,10 @@
   <section id="intro">
   <iframe src="./intro2.html" title="Intro" loading="eager"></iframe>
 </section>
-  <section id="home"  data-src="./partials/home.html"></section>
+  <section id="about" data-src="./about.html" ></section>
+  
   <section id="more"><div style="text-align:center"><h2>FOOTER / MORE</h2></div></section>
+  <section id="footer" data-src="./footer.html"><h2>FOOTER / MORE</h2></div></section>
 </div>
 
   <!-- 외부 자바스크립트 연결 -->
