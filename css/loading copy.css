@@ -17,7 +17,7 @@
   /* ===== 로딩 오버레이( 로더 + 탄성 슬라이드 업) ===== */
   :root{
     --deep:#2055CA; --fg:#FFFBF3;
-    --size:50px; --bar-w:2px; --bar-h:18px; --delay-step:.2s;
+    --size:50px; --bar-w:2px; --bar-h:18px; --delay-step:.08s;
     --font: 'newyork'
   }
   #preloader{
@@ -84,7 +84,7 @@
   /* 데모용 임시 배경(파셜에서 덮어씀) */
 
   /* #home { background:#ffffff; color:#fff; } */
-  #more { background:#fff; }
+  /* #more { background:#fff; } */
 
   #intro, #intro iframe {
     width: 100vw;
