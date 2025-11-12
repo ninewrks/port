@@ -25,19 +25,15 @@
   </div>
 </div>
 
-<!-- 스냅 컨테이너: 각 섹션은 외부 HTML에서 주입 -->
 <div class="snap" id="viewport" aria-hidden="true">
   <section id="intro">
     <iframe src="./intro2.html" title="Intro" loading="eager"></iframe>
   </section>
-  <!-- <section id="about"  data-src="./about.html"></section> -->
-  
 </div>
 
   <main>
 
      <div class="overlay-contents ">
-    
         <div class="txt">
           <div class="top">
               <div class="job">
@@ -59,37 +55,49 @@
           </div>
           <img class="scroll" src="./img/scroll.svg" alt="scroll">
 
-    </div>
-
-      <div class="common-frame">
+    
+      <div class="long-wrap">
+        <div class="common-frame">
           <header>
               <ul>
                   <li><a href="#">Intro</a></li>
                   <li><a href="#">About me</a></li>
                   <li><a href="#">Skills</a></li>
-                  <li class="slogan"><img src="./img/slogan.svg" alt="slogan"></li>
+                  <li class="logo"><img src="./img/slogan.svg" alt="slogan"></li>
                   <li><a href="#">Projects</a></li>
                   <li><a href="#">Contact</a></li>
                   <li><a href="#">Outro</a></li>
               </ul>
           </header>
-          <div class="about">
+          <section class="about">
               <div class="about-t">
-                  <h1>Essence</h1>
-              <p>조용한 아이디어를 디테일로 실현하는 퍼블리셔입니다. 감각적인 디자인과 구조적인 코드를 함께 고민하며, 사용자가 자연스럽게 몰입할 수 있는 경험을 만듭니다.</p>
-              <a href="#">Please click on my resume</a>
-              <p>단순한 생각에서 시작해 세심한 완성으로 이어지는 
-              사용자 경험의 흐름을 중요하게 생각합니다. 불필요한 요소를 덜어내고, 본질적인 동선과 시선에 
-              집중합니다. 작은 디테일이 쌓여 전체의 인상을 만들고, 그 안에서 사용자의 감정과 브랜드의 온도가 만납니다.</p>
+                <h1>Essence</h1>
+                <div class="t1">
+                  <p>조용한 아이디어를 디테일로 실현하는 퍼블리셔입니다. <br>
+                  감각적인 디자인과 구조적인 코드를 함께 고민하며, <br>
+                  사용자가 자연스럽게 몰입할 수 있는 경험을 만듭니다.</p>
+                  <a href="#">Please click on my resume</a>
+                </div>
+                
+                <p class="t2">단순한 생각에서 시작해 세심한 완성으로 이어지는 <br>
+                사용자 경험의 흐름을 중요하게 생각합니다. <br>
+                불필요한 요소를 덜어내고, 본질적인 동선과 시선에 <br>
+                집중합니다. 작은 디테일이 쌓여 전체의 인상을 만들고, <br>
+                그 안에서 사용자의 감정과 브랜드의 온도가 만납니다.</p>
+                  <figcaption class="t3">디자인의 감성과 퍼블리싱의 논리가 자연스럽게 맞물릴 때,<br>
+                  비로소 화면이 하나의 경험으로 완성된다고 느낍니다. <br>
+                  보이지 않는 부분까지 정교하게 다듬으며, <br>
+                  사용자에게 편안하고 깊이 있는 경험을 전달하는 일을 합니다. <br>
+                  <span>웹퍼블리셔, 구연서입니다</span></figcaption>
               </div>
-              
-              <figure>
-                  <img src="./img/profile.jpg" alt="구연서 사진">
-                  <figcaption>디자인의 감성과 퍼블리싱의 논리가 자연스럽게 맞물릴 때,비로소 화면이 하나의 경험으로 완성된다고 느낍니다.보이지 않는 부분까지 정교하게 다듬으며,사용자에게 편안하고 깊이 있는 경험을 전달하는 일을 합니다. <span>웹퍼블리셔, 구연서입니다</span></figcaption>
+              <figure class="koo">
+                <img src="./img/profile.jpg" alt="구연서 사진">
               </figure>
+        </section>
           </div>    
+        <section class="footer">footer</section>
       </div>
-      <section id="more"><div style="text-align:center"><h2>FOOTER / MORE</h2></div></section>
+      
   </main>
 
 

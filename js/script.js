@@ -120,7 +120,7 @@ function updateTextCanvas() {
     (params.fontSize * devicePixelRatio) + "px " +
     fontOptions[params.fontName];
 
-  textureCtx.fillStyle = "#ffffffff";
+  textureCtx.fillStyle = "#ffffff";
   textureCtx.textAlign = "center";
   textureCtx.filter = "blur(3px)";
 
