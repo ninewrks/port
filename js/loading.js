@@ -19,7 +19,7 @@ const timer = setInterval(()=>{
       }, { once:true });
     });
   }
-}, 30);
+}, 10);
 
 /* 첫 섹션(인트로)만 선로드 → 전환 매끈 */
 async function preloadFirst(){

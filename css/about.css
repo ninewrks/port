@@ -2,17 +2,26 @@ body{
     height: 100vh;
 
 }
+main{
+  /* padding-top: 100vh;; */
+}
 header {
     /* border: 1px solid red; */
     height: 100px;
     margin-top: 5rem;
     margin-bottom: 3rem;
+    position: sticky;
+    left: 0;
+    top: 0;
+    padding-top: 1rem;
 }
 ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 7rem;
+    font-size: 0.8rem;
+    font-weight: bold;
 }
 .slogan{
     height: 100px;
@@ -34,7 +43,7 @@ header ul li{
     justify-content: space-between;
 }
 .about h1 {
-    font-size: 5rem;
+    font-size: 6rem;
     font-family: 'newyork';
     color: #2055CA;
     margin-top: 3rem;
