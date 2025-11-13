@@ -1,18 +1,4 @@
- /* ===== Scroll-snap 컨테이너 ===== */
-  html,body{margin:0;}
-  .snap {
-    position: fixed;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    z-index: 0;
-    left: 0;
-    top: 0;
-}
-  section{
-    height:100vh; scroll-snap-align:start;
-    display:flex; align-items:center; justify-content:center;
-  }
+
 
   /* ===== 로딩 오버레이( 로더 + 탄성 슬라이드 업) ===== */
   :root{

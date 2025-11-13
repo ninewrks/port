@@ -1,4 +1,19 @@
 html, body { height: 100%; margin: 0; }
+ /* ===== Scroll-snap 컨테이너 ===== */
+  /* html,body{margin:0;} */
+  .snap {
+    position: fixed;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    z-index: 0;
+    left: 0;
+    top: 0;
+}
+  section{
+    height:100vh; scroll-snap-align:start;
+    display:flex; align-items:center; justify-content:center;
+  }
 body{
   font-size: 20px;
 } 
