@@ -373,14 +373,14 @@ function setupEvents() {
 
   // 모바일 터치 움직임
   canvasEl.addEventListener("touchmove", (e) => {
-    // ❌ e.preventDefault(); 쓰면 스크롤이 막혀버림
-    // => 모바일에서 스크롤도 되고, 효과도 따라오게 하기 위해 제거
+    // ❌ e.preventDefault(); 절대 쓰지 말기
+    // => 써버리면 스크롤이 막혀버려
 
     isPreview = false;
     const t = e.touches[0] || e.targetTouches[0];
     if (!t) return;
     updateMousePosition(t.clientX, t.clientY);
-  }, { passive: true }); // 브라우저에 "스크롤 막지 않을게" 힌트
+  }, { passive: true }); // 브라우저에게 "스크롤 안 막을게요" 라고 알려줌
 }
 
 function updateMousePosition(eX, eY) {
@@ -390,6 +390,7 @@ function updateMousePosition(eX, eY) {
   pointer.x = eX;
   pointer.y = eY;
 }
+
 
 
 // ===============================

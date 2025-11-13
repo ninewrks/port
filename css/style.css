@@ -2,13 +2,13 @@ html, body { height: 100%; margin: 0; }
  /* ===== Scroll-snap 컨테이너 ===== */
   html,body{margin:0;}
   .snap {
-    position: fixed;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    z-index: 0;
-    left: 0;
-    top: 0;
+  position: fixed;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  z-index: 0;
+  left: 0;
+  top: 0;
 }
   section{
     height:100vh; scroll-snap-align:start;
@@ -116,11 +116,23 @@ body{
     }
     .txt {
     padding: 1rem;
-    
-}
+   /* ✅ 이렇게 바꿔줘 */
   .snap {
-    pointer-events: none;
-}
+    position: static;           /* fixed 해제 → body 스크롤 가능 */
+    width: 100%;
+    height: auto;
+    overflow: visible;          /* 안에서 따로 스크롤 안 함 */
+    scroll-snap-type: none;     /* 모바일에서는 스냅 비활성화 */
+  }
+
+  /* section도 전체 화면 강제 안 해도 됨 (원하면 유지 가능) */
+  section {
+    height: auto;
+    min-height: 100vh;          /* 필요하면 이 정도 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   }
   @media(max-width:1440px){
     html{
