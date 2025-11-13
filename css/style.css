@@ -1,6 +1,6 @@
 html, body { height: 100%; margin: 0; }
  /* ===== Scroll-snap 컨테이너 ===== */
-  /* html,body{margin:0;} */
+  html,body{margin:0;}
   .snap {
     position: fixed;
     overflow-y: auto;
@@ -116,6 +116,10 @@ body{
     }
     .txt {
     padding: 1rem;
+    
+}
+  .snap {
+    pointer-events: none;
 }
   }
   @media(max-width:1440px){
