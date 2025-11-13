@@ -1,4 +1,7 @@
 html, body { height: 100%; margin: 0; }
+p{
+  line-height: 1.3;
+}
  /* ===== Scroll-snap 컨테이너 ===== */
   html,body{
     margin:0;
@@ -71,13 +74,13 @@ html, body { height: 100%; margin: 0; }
     /* left: 50%; */
     /* transform: translate(-50%, -50%); */
     z-index: 10;
-    color: #161616;
+    color: #3d3d3d;
     /* font-family: "Pretendard", "Inter", system-ui, -apple-system, sans-serif; */
     /* pointer-events: auto; */
 }
 
 .txt {
-    padding: 4rem;
+    padding: 3rem;
     width: 100%;
     height: 100%;
     display: flex;
@@ -92,7 +95,7 @@ html, body { height: 100%; margin: 0; }
 }
 .name{
     font-family: 'zal';
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: 400;
 }
@@ -104,7 +107,7 @@ html, body { height: 100%; margin: 0; }
   }
 .job{
     font-family: 'zal';
-    font-size: 1rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: 400;
   }
@@ -139,33 +142,149 @@ html, body { height: 100%; margin: 0; }
     left: 50%;
     transform: translateX(-50%);
   }
-  @media(max-width:768px){
-    html{
-      font-size: 12px;
-    }
-    .txt {
-    padding: 1rem;
-   /* ✅ 이렇게 바꿔줘 */
-  .snap {
-    position: static;           /* fixed 해제 → body 스크롤 가능 */
-    width: 100%;
-    height: auto;
-    overflow: visible;          /* 안에서 따로 스크롤 안 함 */
-    scroll-snap-type: none;     /* 모바일에서는 스냅 비활성화 */
-  }
-
-  /* section도 전체 화면 강제 안 해도 됨 (원하면 유지 가능) */
-  section {
-    height: auto;
-    min-height: 100vh;          /* 필요하면 이 정도 */
+  /* ==========about =============
+  ================================*/
+header {
+    height: 100px;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    position: sticky;
+    left: 0;
+    top: 0;
+    padding-top: 1rem;
+    z-index: 100;
+}
+header ul {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-  }
-  }
-  @media(max-width:1440px){
-    html{
-        font-size: 14px
-    }
-  }
-  }
+    gap: 5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.logo {
+    /* height: 100px; */
+    width: 320px;
+    /* width: 100%; */
+}
+.logo img{
+    height: 100%;
+}
+header ul li{
+    text-transform: uppercase;
+    font-family: 'zal';
+    color: #2055CA;
+}
+.common-frame{
+    margin: 0 5rem;
+}
+.about {
+    display: flex;
+    justify-content: space-between;
+    align-items: self-start;
+    height: 100%;
+    position: relative;
+}
+.about h1 {
+    font-size: 11.5rem;
+    font-family: 'newyork';
+    color: #2055CA;
+    margin-top: 3rem;
+    /* margin-bottom: 1rem; */
+}
+.self{
+    margin-top: 1rem;
+    color: #2055CA;
+    line-height: 1.3;
+}
+.self span{
+font-weight: 600;
+}
+.koo img{
+    width: 500px;
+    aspect-ratio: 600/752;
+}
+.koo2 img{
+    width: 300px;
+}
+.about {
+    /* height: 100vh; */
+    font-size: 0.8rem;
+}
+
+.about .t1 {
+    margin-left: 4rem;
+}
+.about-t a{
+    margin-top: 0.5rem;
+}
+
+.koo{
+    /* padding-bottom: 2rem; */
+    /* width: 450px; */
+    margin-top: 24rem;
+}
+.koo2{
+    position: absolute;
+    /* right: -120px; */
+    left: 0;
+    bottom: 0;
+}
+/* ======================
+============skill */
+/* 
+    body {
+      background: #000;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    } */
+.myswiper{
+  margin-top: 10rem;
+}
+.skills h1{
+  font-size: 7.5rem;
+  font-family: 'newyork';
+  margin-right: 13.5rem;
+  color: #3d3d3d;
+}
+   .myswiper {
+     width: 100%;
+     height: 100%;
+   }
+   .skill-slide {
+     font-size: 0.8rem;
+     /* background: #444; */
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   }
+
+.skill-box h2{
+  font-family: 'newyork';
+  font-size: 1.5rem;
+  color: #2055CA;
+}
+.skill-box{
+  margin-bottom: 1rem;
+  width: 12rem;
+}
+
+    /* .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    } */
+.s2{
+  margin-top: 12rem;
+}
+.s3{
+  margin-top: 20rem;
+}
+.s5{
+  margin-top: 12rem;
+}
+

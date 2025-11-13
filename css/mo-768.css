@@ -1,0 +1,53 @@
+
+@media(max-width:768px){
+    .slogan{
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 12rem;
+    }
+    /* =========header========== */
+    .skills h1 {
+    margin-right: 0;
+    font-size: 6rem;
+}
+    /* =========about=========== */
+.common-frame {
+    margin: 0 1rem;
+}
+.about{
+        flex-direction: column;
+    }
+.koo {
+    /* padding-bottom: 2rem; */
+    /* width: 450px; */
+    margin-top: 2rem;
+}
+.koo img{
+    width: 100%;
+}
+.koo2 img{
+    width: 50%;
+}
+.koo{
+    margin-bottom: 2rem;
+}
+.koo2{position: static;}
+    /* ==========skills========= */
+.skills{
+    display: flex;
+    flex-direction: column;
+}
+.myswiper {
+    margin-top: 2rem;
+}
+.skill-box {
+    width: 15rem
+}
+.overlay-contents .skills .swiper{
+    width: 100%;
+}
+.about {
+    /* height: 100vh; */
+    margin-bottom: 5rem;
+}
+}

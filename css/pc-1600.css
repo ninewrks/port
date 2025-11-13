@@ -1,0 +1,10 @@
+@media(max-width:1600px){
+  /* ========header======= */
+  header ul {
+    gap: 3rem;
+}
+    .skills h1{
+      font-size: 5rem;
+      margin-right: 5rem;
+}
+}

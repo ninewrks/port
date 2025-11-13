@@ -1,0 +1,32 @@
+@media(max-width:1024px){
+    html{
+        font-size: 16px;
+    }
+    /* ===========intro===========
+    ============================== */
+    .txt {
+    padding: 2rem;
+}
+.common-frame {
+    margin: 0 2rem;
+}
+/* ======header========= */
+header ul {
+    gap: 2rem;
+}
+/* =============about===========
+================================ */
+.koo img{
+    width: 300px;
+    aspect-ratio: 600/752;
+}
+.koo2 img{
+    width: 200px;
+}
+/* ======skill=========== */
+.skills h1{
+  margin-right: 9rem;
+  font-size: 6rem;
+}
+
+}

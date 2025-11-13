@@ -27,14 +27,14 @@ const fontOptions = {
 const params = {
   fontName: 'zal',
   isBold: false,
-  fontSize: 300, // responsive=false일 때 수동 폰트
+  fontSize: 180, // responsive=false일 때 수동 폰트
   text: "Ink",
   pointerSize: null,
   color: {  r: 0.40, g: 0.75, b: 1.0  },
   // ✅ Responsive font
   responsive: true,
   minFont: 70,     // px (모바일 기준 최소)
-  maxFont: 300,    // px (데스크톱 기준 최대)
+  maxFont: 180,    // px (데스크톱 기준 최대)
   fromWidth: 360,  // 이 너비에서 minFont
   toWidth: 1440    // 이 너비에서 maxFont
 };

@@ -6,10 +6,14 @@
 <title>Assemble Sections + Elastic Loader</title>
 <link rel="stylesheet" href="./css/reset.css?v=1">
 <link rel="stylesheet" href="./css/font.css?v=1">
-<link rel="stylesheet" href="./css/loading copy.css?v=1">
-<link rel="stylesheet" href="./css/about.css?v=1">
+<link rel="stylesheet" href="./css/loading.css?v=1">
+
 <link rel="stylesheet" href="./css/style.css?v=1">
-<link rel="stylesheet" href="./css/skills.css?v=1">
+
+<link rel="stylesheet" href="./css/pc-1600.css">
+<link rel="stylesheet" href="./css/tab-1024.css?=1">
+<link rel="stylesheet" href="./css/mo-768.css">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 
 </head>
@@ -28,7 +32,7 @@
 
 <div class="snap" id="viewport" aria-hidden="true">
   <section id="intro">
-    <iframe src="./intro2.html" title="Intro" loading="eager"></iframe>
+    <iframe src="./intro.html" title="Intro" loading="eager"></iframe>
   </section>
 </div>
 
@@ -83,12 +87,19 @@
                   <a href="#">Please click on my resume</a>
                 </div>
               </div>
-              <figure class="koo">
+              <div class="photos">
+                figure class="koo">
                 <img src="./img/profile.jpg" alt="구연서 사진">
-                <figcaption>
-                  흐름을 다듬어 잉크처럼 선명한 화면을 만드는 <br> 웹 퍼블리셔, 구연서입니다.
+                <figcaption class="self">
+                  흐름을 다듬어 잉크처럼<br>선명한 화면을 만드는 <br> <span>웹 퍼블리셔, 구연서입니다.</span>
                 </figcaption>
               </figure>
+              <figure class="koo2">
+                <img src="./img/IMG_2542.jpg" alt="구연서 사진2">
+              </figure>
+              </div>
+              <
+              
         </section>
         <!-- <section class="lisense">
 
@@ -96,9 +107,9 @@
           <section class="skills">
             <h1>skills</h1>
               <!-- Swiper -->
-            <div class="swiper mySwiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
+            <div class="swiper myswiper">
+              <div class="swiper-wrapper skill-wrap">
+                <div class="swiper-slide skill-slide">
                   <div class="s1">
                     <div class="skill-box">
                       <h2>HTML</h2>
@@ -111,7 +122,7 @@
                   </div>
 
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide skill-slide">
                   <div class="s2">
                     <div class="skill-box">
                       <h2>JavaScript</h2>
@@ -119,7 +130,7 @@
                     </div>                    
                   </div>
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide skill-slide">
                   <div class="s3">
                     <div class="skill-box">
                       <h2>jQuery</h2>
@@ -132,7 +143,7 @@
                   </div>
 
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide skill-slide">
                   <div class="s4">
                     <div class="skill-box">
                       <h2>Photoshop</h2>
@@ -145,7 +156,7 @@
                   </div>
 
                 </div>
-                <div class="swiper-slide">
+                <div class="swiper-slide skill-slide">
                   <div class="s5">
                     <div class="skill-box">
                       <h2>Figma</h2>
@@ -180,9 +191,34 @@
 
   <!-- Initialize Swiper -->
   <script>
-    var swiper = new Swiper(".mySwiper", {
+    var swiper = new Swiper(".myswiper", {
       slidesPerView: 3,
       spaceBetween: 20,
+      breakpoints: {
+      // 1600px 이상
+      1600: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+
+      // 1024px 이상 (PC)
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+
+      // 768px 이상 (Tablet)
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 16,
+      },
+
+      // 모바일 (최소값)
+      0: {
+        slidesPerView: 2,
+        spaceBetween: 12,
+      }
+    },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
