@@ -354,16 +354,26 @@ function resizeCanvas() {
 // ===============================
 // Events
 // ===============================
+// ===============================
+// Events
+// ===============================
 function setupEvents() {
+  // PC 마우스 움직임
   canvasEl.addEventListener("mousemove", (e) => {
     isPreview = false;
-    updateMousePosition(e.pageX, e.pageY);
+    updateMousePosition(e.clientX, e.clientY);
   });
+
+  // 모바일 터치 움직임
   canvasEl.addEventListener("touchmove", (e) => {
-    e.preventDefault();
+    // ❌ e.preventDefault(); 쓰면 스크롤이 막혀버림
+    // => 모바일에서 스크롤도 되고, 효과도 따라오게 하기 위해 제거
+
     isPreview = false;
-    updateMousePosition(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
-  });
+    const t = e.touches[0] || e.targetTouches[0];
+    if (!t) return;
+    updateMousePosition(t.clientX, t.clientY);
+  }, { passive: true }); // 브라우저에 "스크롤 막지 않을게" 힌트
 }
 
 function updateMousePosition(eX, eY) {
@@ -373,6 +383,7 @@ function updateMousePosition(eX, eY) {
   pointer.x = eX;
   pointer.y = eY;
 }
+
 
 // ===============================
 // GUI (반응형 토글 & 범위)
