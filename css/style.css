@@ -1,6 +1,37 @@
 html, body { height: 100%; margin: 0; }
  /* ===== Scroll-snap 컨테이너 ===== */
-  html,body{margin:0;}
+  html,body{
+    margin:0;
+    font-size: 20px;
+  }
+/* ===== 오버레이 안에서 클릭/드래그 허용할 영역들 ===== */
+
+/* 헤더 전체(메뉴 클릭 가능) */
+.overlay-contents header,
+.overlay-contents header a {
+  pointer-events: auto;
+}
+
+/* About 섹션 (텍스트/링크) */
+.overlay-contents .about a {
+  pointer-events: auto;
+}
+
+/* Skills 섹션 + Swiper */
+.overlay-contents .skills .swiper,
+.overlay-contents .skills .swiper * {
+  pointer-events: auto;
+}
+
+/* footer도 클릭 필요하면 */
+.overlay-contents .footer {
+  pointer-events: auto;
+}
+.overlay-contents {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
   .snap {
   position: fixed;
   overflow-y: auto;
@@ -14,9 +45,7 @@ html, body { height: 100%; margin: 0; }
     height:100vh; scroll-snap-align:start;
     display:flex; align-items:center; justify-content:center;
   }
-body{
-  font-size: 20px;
-} 
+
 .long-wrap{
   height: 400vh;
   position: relative;
@@ -44,7 +73,7 @@ body{
     z-index: 10;
     color: #161616;
     /* font-family: "Pretendard", "Inter", system-ui, -apple-system, sans-serif; */
-    pointer-events: none;
+    /* pointer-events: auto; */
 }
 
 .txt {
@@ -86,18 +115,18 @@ body{
     font-size: 2rem;
     line-height: 0.8;
   }
-.grow {
+.into {
     font-family: 'zal';
     font-weight: 300;
     font-size: 2rem;
     line-height: 0.8;
-    margin-left: 3rem;
+    margin-left: 1rem;
 }
   .cre{
     font-family: 'newyork';
     font-size: 2rem;
     line-height: 0.8;
-    margin-left: 8rem;
+    margin-left: 4.5rem;
   }
 .slogan {
     position: absolute;
@@ -138,4 +167,5 @@ body{
     html{
         font-size: 14px
     }
+  }
   }

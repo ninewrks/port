@@ -4,12 +4,13 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Assemble Sections + Elastic Loader</title>
-<link rel="stylesheet" href="./css/reset.css">
-<link rel="stylesheet" href="./css/font.css">
-<link rel="stylesheet" href="./css/loading copy.css">
-
-<link rel="stylesheet" href="./css/about.css">
+<link rel="stylesheet" href="./css/reset.css?v=1">
+<link rel="stylesheet" href="./css/font.css?v=1">
+<link rel="stylesheet" href="./css/loading copy.css?v=1">
+<link rel="stylesheet" href="./css/about.css?v=1">
 <link rel="stylesheet" href="./css/style.css?v=1">
+<link rel="stylesheet" href="./css/skills.css?v=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 
 </head>
 <body>
@@ -48,8 +49,8 @@
                   detail and dedication,<br>
                   into bold creations that connect.</p>  -->
           <div class="slogan">
-              <p class="ideas">Ideas that quietly 
-              <p class="grow">grow into</p>
+              <p class="ideas">Ideas that flow 
+              <p class="into">into inked</p>
               <p class="cre">creation</p>
           </div>
           </div>
@@ -71,29 +72,99 @@
           </header>
           <section class="about">
               <div class="about-t">
-                <h1>Essence</h1>
+                <h1>Ink</h1>
                 <div class="t1">
-                  <p>조용한 아이디어를 디테일로 실현하는 퍼블리셔입니다. <br>
-                  감각적인 디자인과 구조적인 코드를 함께 고민하며, <br>
-                  사용자가 자연스럽게 몰입할 수 있는 경험을 만듭니다.</p>
+                  <p>웹 경험은 명확한 흐름에서 시작된다고 생각합니다. <br>
+                    사용자가 자연스럽게 이동할 수 있도록 구조를 단순하게 정리하고, <br>
+                    핵심 정보가 빠르게 보이도록 우선순위를 조정합니다. <br>
+                    완성된 화면은 잉크처럼 선명하게 읽히는 결과물이어야 합니다. <br>
+                    여백과 선 같은 작은 요소도 시선에 영향을 주기 때문에 <br>
+                    디테일은 간결하게 다듬어 전체 흐름을 유지합니다.</p>
                   <a href="#">Please click on my resume</a>
                 </div>
-                
-                <p class="t2">단순한 생각에서 시작해 세심한 완성으로 이어지는 <br>
-                사용자 경험의 흐름을 중요하게 생각합니다. <br>
-                불필요한 요소를 덜어내고, 본질적인 동선과 시선에 <br>
-                집중합니다. 작은 디테일이 쌓여 전체의 인상을 만들고, <br>
-                그 안에서 사용자의 감정과 브랜드의 온도가 만납니다.</p>
-                  <figcaption class="t3">디자인의 감성과 퍼블리싱의 논리가 자연스럽게 맞물릴 때,<br>
-                  비로소 화면이 하나의 경험으로 완성된다고 느낍니다. <br>
-                  보이지 않는 부분까지 정교하게 다듬으며, <br>
-                  사용자에게 편안하고 깊이 있는 경험을 전달하는 일을 합니다. <br>
-                  <span>웹퍼블리셔, 구연서입니다</span></figcaption>
               </div>
               <figure class="koo">
                 <img src="./img/profile.jpg" alt="구연서 사진">
+                <figcaption>
+                  흐름을 다듬어 잉크처럼 선명한 화면을 만드는 <br> 웹 퍼블리셔, 구연서입니다.
+                </figcaption>
               </figure>
         </section>
+        <!-- <section class="lisense">
+
+        </section> -->
+          <section class="skills">
+            <h1>skills</h1>
+              <!-- Swiper -->
+            <div class="swiper mySwiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="s1">
+                    <div class="skill-box">
+                      <h2>HTML</h2>
+                      <p>HTML로 웹페이지의 기본 구조를 만들고, 콘텐츠를 논리적으로 구분해 접근성 있는 페이지를 설계할 수 있습니다.</p>
+                    </div>
+                    <div class="skill-box">
+                      <h2>CSS</h2>
+                      <p>CSS를 통해 웹페이지의 시각적 스타일을 자유롭게 표현할 수 있습니다</p>
+                    </div>                    
+                  </div>
+
+                </div>
+                <div class="swiper-slide">
+                  <div class="s2">
+                    <div class="skill-box">
+                      <h2>JavaScript</h2>
+                      <p>JavaScript를 통해 웹페이지에 생동감 있는 인터랙션을 추가할 수 있습니다.</p>
+                    </div>                    
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="s3">
+                    <div class="skill-box">
+                      <h2>jQuery</h2>
+                      <p>jQuery를 통해 복잡한 JavaScript 기능을 간단하게 구현할 수 있습니다.</p>
+                    </div>
+                    <div class="skill-box">
+                      <h2>React</h2>
+                      <p>React와 Styled-components로 유지보수 쉬운 컴포넌트 구조와 스타일을 구현할 수 있습니다.</p>
+                    </div>                    
+                  </div>
+
+                </div>
+                <div class="swiper-slide">
+                  <div class="s4">
+                    <div class="skill-box">
+                      <h2>Photoshop</h2>
+                      <p>Photoshop을 통해 이미지를 보정하고 합성하여 시각적인 완성도를 높일 수 있습니다.</p>
+                    </div>
+                    <div class="skill-box">
+                      <h2>Illustrator</h2>
+                      <p>Illustrator를 통해 로고, 아이콘, 인포그래픽 등 다양한 벡터 디자인을 제작할 수 있습니다.</p>
+                    </div>                    
+                  </div>
+
+                </div>
+                <div class="swiper-slide">
+                  <div class="s5">
+                    <div class="skill-box">
+                      <h2>Figma</h2>
+                      <p>Figma를 통해 웹과 모바일 인터페이스를 시각적으로 설계할 수 있습니다.</p>
+                    </div>
+                    <div class="skill-box">
+                      <h2>GitHub</h2>
+                      <p>Git과 GitHub를 통해 디자인 및 코드의 버전을 체계적으로 관리할 수 있습니다.</p>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-pagination"></div>
+            </div>
+
+          </section>
+        
           </div>    
         <section class="footer">footer</section>
       </div>
@@ -103,5 +174,20 @@
 
   <!-- 외부 자바스크립트 연결 -->
   <script src="./js/loading.js" defer></script>
+  
+    <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  </script>
 </body>
 </html>
