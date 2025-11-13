@@ -30,7 +30,7 @@ const params = {
   fontSize: 100, // responsive=false일 때 수동 폰트
   text: "Essence",
   pointerSize: null,
-  color: { r: .32, g: .5, b: 1 },
+  color: { r: 0.55, g: 0.90, b: 1.0 },
   // ✅ Responsive font
   responsive: true,
   minFont: 40,     // px (모바일 기준 최소)
