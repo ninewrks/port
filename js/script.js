@@ -356,7 +356,7 @@ const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 // 모바일에서만 색 더 연하게 (하늘색의 연한 버전)
 if (isMobile) {
-  params.color = { r: 0.75, g: 0.9, b: 1.0 }; 
+  params.color = {  r: 0.85, g: 0.95, b: 1.0 }; 
 } else {
   // PC에서는 기존 하늘색 유지
   params.color = { r: 0.40, g: 0.75, b: 1.0 };
