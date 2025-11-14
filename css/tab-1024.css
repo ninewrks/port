@@ -1,32 +1,117 @@
 @media(max-width:1024px){
-    html{
-        font-size: 16px;
-    }
-    /* ===========intro===========
-    ============================== */
-    .txt {
+  html{
+      font-size: 16px;
+  }
+.wide-frame {
+  width: auto;
+}
+  .txt {
     padding: 2rem;
-}
-.common-frame {
+  }
+
+  .common-frame {
     margin: 0 2rem;
-}
-/* ======header========= */
-header ul {
-    gap: 2rem;
-}
-/* =============about===========
-================================ */
-.koo img{
-    width: 300px;
-    aspect-ratio: 600/752;
-}
-.koo2 img{
-    width: 200px;
-}
-/* ======skill=========== */
-.skills h1{
-  margin-right: 9rem;
-  font-size: 6rem;
+    position: relative;
+    z-index: 100;
+  }
+
+  /* ====== header ====== */
+
+  /* 🔹기본: 숨김 */
+  .menu-mo {
+    display: none;           /* ⬅⬅⬅ 이걸 none 으로 */
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 999;
+  }
+
+  /* 🔹about 섹션 이후부터 보여줄 때 */
+  body.show-mobile-menu .menu-mo {
+    display: block;          /* ⬅ 이때만 block */
+  }
+
+  header .logo{
+    display: none;
+  }
+  header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    max-width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    z-index: 1000;
+    left: initial;
 }
 
+  header ul {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 24px 24px;
+    gap: 1.2rem;
+  }
+
+  header a {
+    color: #2055CA; /* 🔹여기 #가 두 개라서(# #2055CA) 깨져 있었음 */
+  }
+
+  .menu-close {
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 22px;
+    color: #2055CA;
+  }
+
+  header.is-open {
+    transform: translateX(0);
+  }
+
+  .menu-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* =============about=========== */
+  .koo img{
+      width: 300px;
+      aspect-ratio: 600/752;
+  }
+  .koo2 img{
+      width: 200px;
+  }
+  /* ======skill=========== */
+  .skills h1 {
+    margin-right: 0;
+    font-size: 6rem;
+}
+
+  /* ======about2 / cert-list=========== */
+  .about2 h2 {
+    font-size: 4rem;
+  }
+  .cert-list {
+    /* background: #f5f5f5; */
+    padding: 0;
+    width: 100%;
+    margin: 0;
+  }
+
+  .cert-item {
+    padding: 1.2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+  .cert-name {
+    min-width: 150px;
+    max-width: 150px;
+    padding-right: 2rem;
+    font-size: 0.8rem;
+  }
 }

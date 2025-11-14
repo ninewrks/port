@@ -6,3 +6,7 @@
     font-family: 'newyork';
     src: url(../font/newyork/NewYork\ PERSONAL\ USE.otf);
 }
+@font-face{
+    font-family: 'sans';
+    src: url(../font/NotoSansKR-VariableFont_wght.ttf);
+}
