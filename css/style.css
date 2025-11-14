@@ -266,6 +266,11 @@ header ul li{
     margin-top: 3rem;
     /* margin-bottom: 1rem; */
 }
+.about p{
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 2.1;
+}
 .self {
     font-size: 1rem;
     margin-top: 1rem;
