@@ -1,4 +1,4 @@
-@media(max-width:1600px){
+@media(max-width:1440px){
   /* ========header======= */
   header ul {
     gap: 3rem;
@@ -6,5 +6,12 @@
     .skills h1{
       font-size: 5rem;
       margin-right: 5rem;
+}
+.koo img {
+    width: 350px;
+    aspect-ratio: 600/752;
+}
+.koo2 img {
+    width: 200px;
 }
 }
