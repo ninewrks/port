@@ -368,7 +368,7 @@ font-weight: 600;
     margin-top: 5rem !important;
 }
 .skills {
-    margin-top: 6rem;
+    /* margin-top: 6rem; */
     text-align: center;
 }
 .skills h1 {
@@ -428,11 +428,11 @@ font-weight: 600;
     /* margin-bottom: 1rem; */
   
 }
-.project-intro h1{
-  font-size: 6rem;
-  font-family: 'newyork';
-  text-align: center;
-  margin-bottom: 3rem;
+.project-intro h1 {
+    font-size: 6rem;
+    font-family: 'newyork';
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 .project-li {
@@ -482,14 +482,11 @@ font-weight: 600;
 }
 
 /* ============project pop-up*/
-
-#pop-up {
+/* index 설정 */
+#pop-up,#poster {
   scroll-margin-top: 6rem; /* 고정 헤더 있을 때 유용함 */
 }
-.pop-up{
-  margin-top: 6rem;
-  margin-bottom: 6rem;
-}
+
 .pop-up__scrollbar {
   height: 4px;
   background: #dbe3ff; /* 옅은 잉크 */
@@ -639,7 +636,6 @@ font-weight: 600;
   min-height: 0;
   align-items: flex-start;
 }
-
 /* ✨ 포스터만 스크롤 영역 (여기 핵심!) */
 .design-modal__figure{
   flex: 2;
@@ -690,3 +686,5 @@ font-weight: 600;
   margin-top: 1rem;
   font-weight: 600;
 }
+/* ============각섹션 마진  */
+section{margin-bottom: 10rem;}
