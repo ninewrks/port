@@ -113,19 +113,12 @@
     font-size: 0.8rem;
 }
 /* ===============pop-up */
- /* 모달 자체가 스크롤이 되도록 */
-  .design-modal {
-    overflow-y: auto;         /* ✨ 화면 전체 스크롤 */
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* 모달 박스는 더 이상 90vh에 갇히지 않게 */
-  .design-modal__content {
-    max-height: none;         /* 높이 제한 풀기 */
-    height: auto;
-    overflow: visible;        /*  안쪽에서 숨기지 말고 그냥 다 보이게 */
-    margin: 2rem 1rem;
-    padding: 2rem 1.5rem;
+ /* 타이틀 영역: 한 줄 → 세로 쌓기 */
+  .pop-up__title-area {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 3rem;
   }
 
   /* 모바일에선 세로 레이아웃 */
@@ -134,17 +127,21 @@
     gap: 2rem;
   }
 
-  /* 포스터 영역도 고정 높이 없이 전체 같이 내려가게 */
+  /* 모달 '박스' 안에서만 스크롤되게 */
+.design-modal__content {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    height: 100vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+  /* 모바일에선 포스터를 따로 스크롤 안 하고 같이 내려가게 */
   .design-modal__figure {
     max-height: none;
     overflow: visible;
   }
-
-  /* pop-up 타이틀은 이미 너가 준 대로 */
-  .pop-up__title-area {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-bottom: 3rem;
-  }
+  .project-intro h1 {
+    margin-top: 6rem;
+}
 }
