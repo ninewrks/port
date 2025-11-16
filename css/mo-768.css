@@ -124,14 +124,17 @@
     flex-direction: column;
     gap: 3rem;
 }
-.design-modal__content {
-    max-width: 1000px;
-    overflow: scroll;
-    /* height: 100vh; */
-    /* margin: 5vh auto; */
-    background: #fff;
-    /* border-radius: 16px; */
-    padding: 4rem 1rem;
-    z-index: 1;
+  /* ① 모달 래퍼 자체에서 스크롤 허용 */
+  .design-modal {
+    position: fixed;
+    inset: 0;
+      overflow-y: auto;
+ /* ② 모달 콘텐츠 높이 제한 + 내부 스크롤 */
+  .design-modal__content {
+    max-height: 90vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 2rem; /* 모바일 여백 축소 */
+  }
 }
 }

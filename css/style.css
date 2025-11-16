@@ -565,8 +565,8 @@ font-weight: 600;
 .design-modal__close {
     position: absolute;
     color: #2055CA;
-    top: 2rem;
-    right: 2rem;
+    top: 1rem;
+    right: 1rem;
     /* width: 100%; */
     font-size: 1rem;
     /* height: 3rem; */
