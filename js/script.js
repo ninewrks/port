@@ -258,13 +258,12 @@ function render(t) {
   const dt = 1 / 60;
 
   // 미리보기 자동 포인터
-  if (t && isPreview) {
-    updateMousePosition(
-      (0.5 - 0.45 * Math.sin(0.003 * t - 2)) * window.innerWidth,
-      (0.5 + 0.1 * Math.sin(0.0025 * t) + 0.1 * Math.cos(0.002 * t)) * window.innerHeight
-    );
-  }
-
+if (t && isPreview) {
+  updateMousePosition(
+    (0.5 - 0.45 * Math.sin(0.0015 * t - 2)) * window.innerWidth,
+    (0.5 + 0.1 * Math.sin(0.0012 * t) + 0.1 * Math.cos(0.001 * t)) * window.innerHeight
+  );
+}
   if (pointer.moved) {
     if (!isPreview) pointer.moved = false;
 
@@ -278,7 +277,13 @@ function render(t) {
     velocity.swap();
 
     gl.uniform1i(splatProgram.uniforms.u_input_texture, outputColor.read().attach(1));
-    gl.uniform3f(splatProgram.uniforms.u_point_value, 1 - params.color.r, 1 - params.color.g, 1 - params.color.b);
+    const intensity = 0.3;  // 처음엔 매우 연함
+    gl.uniform3f(
+      splatProgram.uniforms.u_point_value,
+      (1 - params.color.r) * intensity,
+      (1 - params.color.g) * intensity,
+      (1 - params.color.b) * intensity
+    );
     blit(outputColor.write());
     outputColor.swap();
   }
