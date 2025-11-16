@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Assemble Sections + Elastic Loader</title>
+<title>koo yeon seo</title>
 <link rel="stylesheet" href="./css/reset.css?v=1">
 <link rel="stylesheet" href="./css/font.css?v=1">
 <link rel="stylesheet" href="./css/loading.css?v=1">
@@ -30,11 +30,191 @@
   </div>
 </div>
 
-<div class="snap" id="viewport" aria-hidden="true">
+
   <section id="intro">
-    <iframe src="./intro.html" title="Intro" loading="eager"></iframe>
+    <canvas></canvas>
+
+
+<script type="x-shader/x-fragment" id="vertShader">
+    precision highp float;
+
+    varying vec2 vUv;
+    attribute vec2 a_position;
+
+    varying vec2 vL;
+    varying vec2 vR;
+    varying vec2 vT;
+    varying vec2 vB;
+    uniform vec2 u_texel;
+
+    void main () {
+        vUv = .5 * (a_position + 1.);
+        vL = vUv - vec2(u_texel.x, 0.);
+        vR = vUv + vec2(u_texel.x, 0.);
+        vT = vUv + vec2(0., u_texel.y);
+        vB = vUv - vec2(0., u_texel.y);
+        gl_Position = vec4(a_position, 0., 1.);
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragShaderAdvection">
+    precision highp float;
+    precision highp sampler2D;
+
+    varying vec2 vUv;
+    uniform sampler2D u_velocity_texture;
+    uniform sampler2D u_input_texture;
+    uniform vec2 u_texel;
+    uniform float u_dt;
+    uniform float u_use_text;
+    uniform sampler2D u_text_texture;
+
+    vec4 bilerp (sampler2D sam, vec2 uv, vec2 tsize) {
+        vec2 st = uv / tsize - 0.5;
+
+        vec2 iuv = floor(st);
+        vec2 fuv = fract(st);
+
+        vec4 a = texture2D(sam, (iuv + vec2(0.5, 0.5)) * tsize);
+        vec4 b = texture2D(sam, (iuv + vec2(1.5, 0.5)) * tsize);
+        vec4 c = texture2D(sam, (iuv + vec2(0.5, 1.5)) * tsize);
+        vec4 d = texture2D(sam, (iuv + vec2(1.5, 1.5)) * tsize);
+
+        return mix(mix(a, b, fuv.x), mix(c, d, fuv.x), fuv.y);
+    }
+
+    void main () {
+        vec2 coord = vUv - u_dt * bilerp(u_velocity_texture, vUv, u_texel).xy * u_texel;
+        float text = texture2D(u_text_texture, vec2(vUv.x, 1. - vUv.y)).r;
+        float dissipation = (.96 + text * .04 * u_use_text);
+
+        gl_FragColor = dissipation * bilerp(u_input_texture, coord, u_texel);
+        gl_FragColor.a = 1.;
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragShaderDivergence">
+    precision highp float;
+    precision highp sampler2D;
+
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D u_velocity_texture;
+
+    void main () {
+        float L = texture2D(u_velocity_texture, vL).x;
+        float R = texture2D(u_velocity_texture, vR).x;
+        float T = texture2D(u_velocity_texture, vT).y;
+        float B = texture2D(u_velocity_texture, vB).y;
+
+        float div = .6 * (R - L + T - B);
+        gl_FragColor = vec4(div, 0., 0., 1.);
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragShaderPressure">
+    precision highp float;
+    precision highp sampler2D;
+
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D u_pressure_texture;
+    uniform sampler2D u_divergence_texture;
+    uniform sampler2D u_text_texture;
+
+    void main () {
+
+        float text = texture2D(u_text_texture, vec2(vUv.x, 1. - vUv.y)).r;
+
+        float L = texture2D(u_pressure_texture, vL).x;
+        float R = texture2D(u_pressure_texture, vR).x;
+        float T = texture2D(u_pressure_texture, vT).x;
+        float B = texture2D(u_pressure_texture, vB).x;
+        float C = texture2D(u_pressure_texture, vUv).x;
+        float divergence = texture2D(u_divergence_texture, vUv).x;
+
+        float pressure = (L + R + B + T - divergence) * 0.25;
+        pressure += (.2 * text);
+
+        gl_FragColor = vec4(pressure, 0., 0., 1.);
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragShaderGradientSubtract">
+    precision highp float;
+    precision highp sampler2D;
+
+    varying highp vec2 vUv;
+    varying highp vec2 vL;
+    varying highp vec2 vR;
+    varying highp vec2 vT;
+    varying highp vec2 vB;
+    uniform sampler2D u_pressure_texture;
+    uniform sampler2D u_velocity_texture;
+
+    uniform sampler2D u_text_texture;
+
+    void main () {
+        float L = texture2D(u_pressure_texture, vL).x;
+        float R = texture2D(u_pressure_texture, vR).x;
+        float T = texture2D(u_pressure_texture, vT).x;
+        float B = texture2D(u_pressure_texture, vB).x;
+        vec2 velocity = texture2D(u_velocity_texture, vUv).xy;
+        velocity.xy -= vec2(R - L, T - B);
+        gl_FragColor = vec4(velocity, 0., 1.);
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragShaderPoint">
+    precision highp float;
+    precision highp sampler2D;
+
+    varying vec2 vUv;
+    uniform sampler2D u_input_texture;
+    uniform float u_ratio;
+    uniform vec3 u_point_value;
+    uniform vec2 u_point;
+    uniform float u_point_size;
+
+    uniform sampler2D u_text_texture;
+
+
+    void main () {
+        vec2 p = vUv - u_point.xy;
+        p.x *= u_ratio;
+        vec3 splat = pow(2., -dot(p, p) / u_point_size) * u_point_value;
+
+        float text = texture2D(u_text_texture, vec2(vUv.x, 1. - vUv.y)).r;
+        splat *= (.7 + .2 * text);
+
+        vec3 base = texture2D(u_input_texture, vUv).xyz;
+        gl_FragColor = vec4(base + splat, 1.);
+    }
+</script>
+
+<script type="x-shader/x-fragment" id="fragShaderOutputShader">
+    precision highp float;
+    precision highp sampler2D;
+
+    varying vec2 vUv;
+    uniform sampler2D u_output_texture;
+    uniform sampler2D u_text_texture;
+
+    void main () {
+        vec3 C = texture2D(u_output_texture, vUv).rgb;
+        float text = texture2D(u_text_texture, vec2(vUv.x, 1. - vUv.y)).r; 
+        gl_FragColor = vec4(vec3(1.) - C, 1.);
+    }
+</script>
+    <script type="module" src="./js/script.js"></script>
   </section>
-</div>
+
 
   <main class="wide-frame">
      <div class="overlay-contents ">
@@ -52,9 +232,9 @@
                   detail and dedication,<br>
                   into bold creations that connect.</p>  -->
           <div class="slogan">
-              <p class="ideas">Ideas that flow 
+              <p class="ideas">Ideas that flow
               <p class="into">into inked</p>
-              <p class="cre">creation</p>
+              <p class="cre">clarity</p>
           </div>
           </div>
           <img class="scroll" src="./img/scroll.svg" alt="scroll">
@@ -230,11 +410,88 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
               <div class="swiper-pagination"></div>
             </div>
           </section>
-          <section class="pop-up">
+          <section class="project-intro">
+            <h1>Project index</h1>
+            <ul class="project-ul">
+              <li class="project-li">
+                <a href="#pop-up">
+                  <button type="button" class="tag-chip">Banner <sup>1</sup></button>
+                  <div class="project-txt">
+                    <h3>pop-up designs</h3>
+                    <ul class="project-d-ul">
+                      <li>Nike airforce</li>
+                      <li>Blackfriday monotone</li>
+                      <li>Blackfriday 70%</li>
+                      <li>christmas event</li>
+                      <li>Blackfriday 3d</li>
+                      <li>Nike pink Sneakers</li>
+                    </ul>
+                  </div>
+                </a>
+              </li>
+              <li class="project-li">
+                <button type="button" class="tag-chip">Poster <sup>2</sup></button>
+                <div class="project-txt">
+                  <h3>poster designs</h3>
+                  <ul class="project-d-ul">
+                    <li>Music festival</li>
+                    <li>Orange</li>
+                    <li>Save the earth1</li>
+                    <li>Save the earth2</li>
+                    <li>Matcha latte</li>
+                    <li>Donuts</li>
+                  </ul>
+                </div>
+                
+              </li>
+              <li class="project-li">
+                <button type="button" class="tag-chip">Detail Page <sup>3</sup></button>
+                <div class="project-txt">
+                  <h3>detail page designs</h3>
+                  <ul class="project-d-ul">
+                    <li>Cosmetic</li>
+                    <li>Headphone</li>
+                    <li>Furniture</li>
+                  </ul>
+                </div>
+                
+                
+              </li>
+              <li class="project-li">
+                <button type="button" class="tag-chip">Web · UI <sup>4</sup></button>
+                <div class="project-txt">
+                  <h3>Web Production</h3>
+                  <ul class="project-d-ul">
+                    <li>Inscent</li>
+                    <li>Bakeup</li>
+                  </ul>
+                </div>
+              </li>
+              <li class="project-li-last">
+                <div class="project-txt">
+                  <div class="project-etc">
+                    <button type="button" class="tag-chip">Creative<sup>etc</sup></button>
+                    <h3>(Other Archive)</h3>
+                  </div>
+                  <ul class="project-d-ul-last">
+                    <li>Character & Emoji</li>
+                    <li>3D Modeling</li>
+                    <li>Legacy Designs 2023~ver</li>
+                    <li>Textile Design</li>
+                  </ul>
+                </div>
+              </li>
+            
+            </ul>
+
+          </section>
+          <!-- 팝업 -->
+          <section class="pop-up" id="pop-up">
             <div class="pop-up__inner">
 
               <!-- 타이틀 라인 -->
-               <button type="button" class="tag-chip">project1</button>
+               <button type="button" class="tag-chip">Banner<sup>1</sup></button>
+               <button type="button" class="tag-chip">desingn</button>
               <div class="pop-up__title-area">
                 
 
@@ -266,7 +523,8 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
                             data-title="Nike Air Force 할인 프로모션 배너"
                             data-desc="블루 라인 그래픽과 제품 실사를 조합해 스포티한 브랜드 아이덴티티를 강조한 배너입니다."
                             data-intent="제품의 블루 포인트 컬러를 시각적 키컬러로 확장해 일관된 톤을 유지하고, 다이내믹한 라인 그래픽으로 스니커즈 특유의 에너지감을 표현했습니다. 
-                          정교한 제품 실사를 중심에 배치해 ‘상품 자체의 매력’이 드러나도록 했고, 오프라인 매장 버튼은 명확한 액션 포인트가 되도록 별도 강조했습니다.">
+                          정교한 제품 실사를 중심에 배치해 ‘상품 자체의 매력’이 드러나도록 했고, 오프라인 매장 버튼은 명확한 액션 포인트가 되도록 별도 강조했습니다."
+                            data-tags="banner<sup>1</sup>,design">
                             <span>(SHOW DESIGN)</span>
                           </a>
                         </figure>
@@ -288,7 +546,8 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
                               data-title="BLACK FRIDAY 모노톤 콘셉트 배너"
                               data-desc="모노톤 기반에 쇼핑카트 그래픽을 더해 세일 시즌의 직관적 이미지를 강조한 배너입니다."
                               data-intent="블랙∙화이트 대비를 활용해 한눈에 들어오는 강렬함을 만들고, 쇼핑카트와 별 오브젝트로 블랙프라이데이의 쇼핑 분위기를 시각적으로 강화했습니다. 
-                            세리프 타이포로 프리미엄 톤을 더해 단순한 할인 정보가 아니라 브랜드 캠페인 성격의 무게감을 함께 전달했습니다.">
+                            세리프 타이포로 프리미엄 톤을 더해 단순한 할인 정보가 아니라 브랜드 캠페인 성격의 무게감을 함께 전달했습니다."
+                            data-tags="banner<sup>1</sup>,design">
                               <span>(SHOW DESIGN)</span>
                             </a>
                         </figure>
@@ -309,7 +568,8 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
                                data-title="크리스마스 스페셜 이벤트 배너"
                                data-desc="연말 시즌, 한정 기간 프로모션을 강조한 크리스마스 이벤트 배너입니다."
                                data-intent="따뜻한 퍼플 그라디언트와 귀여운 일러스트를 사용해 크리스마스의 설렘과 즐거운 분위기를 전달했습니다. 
-                        눈 내리는 듯한 파티클과 선물 박스 모티브로 혜택이 ‘열리는’ 느낌을 주고, 주요 정보는 중앙에 크게 배치해 한눈에 이벤트 내용을 인지할 수 있도록 했습니다.">
+                        눈 내리는 듯한 파티클과 선물 박스 모티브로 혜택이 ‘열리는’ 느낌을 주고, 주요 정보는 중앙에 크게 배치해 한눈에 이벤트 내용을 인지할 수 있도록 했습니다."
+                        data-tags="banner<sup>1</sup>,design">
                               <span>(SHOW DESIGN)</span>
                             </a>
                         </figure>
@@ -330,7 +590,8 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
                               data-title="BLACK FRIDAY 3D 타이포 배너"
                               data-desc="3D 풍선 질감의 타이포로 블랙프라이데이의 팝한 분위기를 강조한 배너입니다."
                               data-intent="검은 배경 위에 컬러풀한 3D 타이포를 더해 강한 대비감을 만들고, 쇼핑 시즌의 활기와 즐거움을 시각적으로 표현했습니다. 
-                            풍선 텍스처로 부담스럽지 않은 재미 요소를 넣어 브랜드 톤을 부드럽게 유지하며, 할인 정보를 중앙에 집중 배치해 메시지 전달력을 높였습니다.">
+                            풍선 텍스처로 부담스럽지 않은 재미 요소를 넣어 브랜드 톤을 부드럽게 유지하며, 할인 정보를 중앙에 집중 배치해 메시지 전달력을 높였습니다."
+                            data-tags="banner<sup>1</sup>,design">
                               <span>(SHOW DESIGN)</span>
                             </a>
                            
@@ -352,7 +613,8 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
                               data-title="Nike UP TO 50% 세일 배너"
                               data-desc="핑크 톤을 활용해 산뜻하고 트렌디한 분위기로 구성한 나이키 오프라인 매장 프로모션 배너입니다."
                               data-intent="신발 컬러에서 가져온 부드러운 핑크·베이지 그라디언트를 배경에 적용해 제품과 자연스럽게 연결되도록 했습니다. 
-                            타이포는 굵은 화이트 계열을 사용해 배경과의 대비를 높였고, 날짜 및 매장 정보는 하단에 정렬해 정보 구조를 명확하게 분리했습니다.">
+                            타이포는 굵은 화이트 계열을 사용해 배경과의 대비를 높였고, 날짜 및 매장 정보는 하단에 정렬해 정보 구조를 명확하게 분리했습니다."
+                            data-tags="banner<sup>1</sup>,design">
                               <span>(SHOW DESIGN)</span>
                             </a>
                         </figure>
@@ -373,7 +635,8 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
                               data-title="70% OFF 블랙프라이데이 배너"
                               data-desc="입체적인 숫자 타이포를 중심으로 할인 폭을 직관적으로 전달한 블랙프라이데이 배너입니다."
                               data-intent="강렬한 핑크 톤의 3D 숫자 타이포를 메인 포인트로 사용해 할인율이 가장 먼저 눈에 들어오도록 구성했습니다. 
-                            어두운 배경과 네온 느낌의 별 오브젝트로 시즌 특유의 화려함을 담았으며, 상단 리본 형태 그래픽을 통해 ‘행사 기간’ 정보를 명확하게 안내했습니다.">
+                            어두운 배경과 네온 느낌의 별 오브젝트로 시즌 특유의 화려함을 담았으며, 상단 리본 형태 그래픽을 통해 ‘행사 기간’ 정보를 명확하게 안내했습니다."
+                            data-tags="banner<sup>1</sup>,design">
                               <span>(SHOW DESIGN)</span>
                             </a>
                         </figure>
@@ -391,6 +654,168 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
 
             </div>
           </section>
+          <!-- ===================
+          ===========포스터 -->
+          <section class="poster" id="poster">
+            <div class="pop-up__inner">
+
+              <!-- 타이틀 라인 -->
+              <button type="button" class="tag-chip">Poster<sup>1</sup></button>
+              <button type="button" class="tag-chip">design</button>
+
+              <div class="pop-up__title-area">
+                <h2 class="pop-up__title">
+                  Projects <span>poster design</span>
+                </h2>
+
+                <p class="pop-up__desc">
+                  각 포스터는 주제와 매체의 특성에 맞게 색감, 타이포그래피, 레이아웃을 다르게 구성해
+                  서로 다른 무드를 보여줍니다. 메시지가 가장 잘 보이는 방식으로 그래픽과 텍스트를 조합했습니다.
+                </p>
+              </div>
+
+              <!-- 콘텐츠 슬라이더/그리드 -->
+              <div class="swiper pop-up__swiper">
+                <ul class="swiper-wrapper pop-up__list">
+
+                  <!-- 1. Save the Earth – 포스터 01 (파란 배경) -->
+                  <li class="swiper-slide pop-up__item">
+                    <article class="pop-up__card">
+                      <figure class="pop-up__thumb">
+                        <img src="./img/poster/earth1.jpg" alt="Save the Earth 포스터 1">
+                        <!--  hover overlay -->
+                        <a href="#"
+                          class="pop-up__overlay"
+                          data-title="Save the Earth poster 01"
+                          data-desc="지구를 감싸 쥔 손과 북극곰을 중심으로, ‘SAVE THE EARTH, SAVE OURSELVES’ 메시지를 담은 일러스트 포스터입니다."
+                          data-intent="짙은 블루 배경 위에 그린과 핑크를 조합해 친환경 캠페지이면서도 팝한 인상을 주도록 구성했습니다. 둥글게 부풀린 타이포그래피를 지구 형태와 연결해 메시지 자체가 그래픽 요소가 되도록 만들었고, 중앙의 북극곰을 통해 기후 위기의 상징성을 명확하게 드러냈습니다. 하단 카피는 ‘지구를 지키는 일은 곧 우리를 지키는 일’이라는 메시지를 다시 한 번 정리해줍니다."
+                          data-tags="poster<sup>2</sup>,design">
+                          <span>(SHOW DESIGN)</span>
+                        </a>
+                      </figure>
+                      <div class="pop-up__info">
+                        <h3 class="pop-up__name">Save the Earth poster 01</h3>
+                        <p class="pop-up__sub">지구와 북극곰, 손 모티브를 결합해 환경 보호 메시지를 팝한 일러스트 스타일로 표현한 포스터입니다.</p>
+                      </div>
+                    </article>
+                  </li>
+
+                  <!-- 2. Orange Sunset 포스터 (픽셀 오렌지) -->
+                  <li class="swiper-slide pop-up__item">
+                    <article class="pop-up__card">
+                      <figure class="pop-up__thumb">
+                        <img src="./img/poster/orange.jpg" alt="Orange Sunset 포스터">
+                        <!--  hover overlay -->
+                        <a href="#"
+                          class="pop-up__overlay"
+                          data-title="Orange Sunset poster"
+                          data-desc="픽셀 그래픽과 오렌지 컬러 팔레트로 레트로 게임 느낌을 살린 과일 프로모션 포스터입니다."
+                          data-intent="배경과 타이틀에 따뜻한 오렌지 톤을 사용해 맛과 향을 직관적으로 느낄 수 있도록 했고, 픽셀 형태의 오렌지 일러스트로 귀여운 레트로 감성을 더했습니다. 상단과 하단에 배치한 작은 텍스트는 제품 정보와 분위기를 보조하는 역할을 하며, 중앙의 ‘Orange / Sunset’ 타이포가 자연스럽게 시선을 위아래로 연결해 줍니다."
+                          data-tags="poster<sup>2</sup>,design">
+                          <span>(SHOW DESIGN)</span>
+                        </a>
+                      </figure>
+                      <div class="pop-up__info">
+                        <h3 class="pop-up__name">Orange Sunset poster</h3>
+                        <p class="pop-up__sub">픽셀 아트와 선명한 오렌지 컬러로 레트로한 느낌의 과일 프로모션 무드를 표현한 포스터입니다.</p>
+                      </div>
+                    </article>
+                  </li>
+
+                  <!-- 3. Matcha Latte 포스터 -->
+                  <li class="swiper-slide pop-up__item">
+                    <article class="pop-up__card">
+                      <figure class="pop-up__thumb">
+                        <img src="./img/poster/matcha.jpg" alt="Matcha Ice Cream Latte 포스터">
+                        <!--  hover overlay -->
+                        <a href="#"
+                          class="pop-up__overlay"
+                          data-title="Matcha Ice Cream Latte poster"
+                          data-desc="말차 소프트 아이스크림 라테를 주인공으로, 그린 톤과 곡선형 타이포를 활용한 카페 프로모션 포스터입니다."
+                          data-intent="잔 속 말차 아이스크림의 형태를 따라가는 곡선 그래픽과 타이포를 배경에 배치해 ‘크리미하게 흐르는’ 질감을 시각화했습니다. 전체적으로 톤 다운된 그린 팔레트를 사용해 말차 특유의 진하고 고요한 분위기를 표현했고, 크고 작은 영문 타이틀을 겹쳐 배치해 트렌디한 카페 브랜딩 느낌을 강화했습니다. 하단의 짧은 카피와 오픈 날짜 정보로 프로모션 용도도 명확히 드러냅니다."
+                          data-tags="poster<sup>2</sup>,design">
+                          <span>(SHOW DESIGN)</span>
+                        </a>
+                      </figure>
+                      <div class="pop-up__info">
+                        <h3 class="pop-up__name">Matcha Ice Cream Latte poster</h3>
+                        <p class="pop-up__sub">톤 다운된 그린과 곡선형 타이포로 말차 라테의 크리미한 질감과 분위기를 살린 카페 프로모션 포스터입니다.</p>
+                      </div>
+                    </article>
+                  </li>
+
+                  <!-- 4. Donut Worry 포스터 -->
+                  <li class="swiper-slide pop-up__item">
+                    <article class="pop-up__card">
+                      <figure class="pop-up__thumb">
+                        <img src="./img/poster/donut.jpg" alt="Donut Worry Be Happy 포스터">
+                        <!--  hover overlay -->
+                        <a href="#"
+                          class="pop-up__overlay"
+                          data-title="Donut Worry, Be Happy poster"
+                          data-desc="도넛 실사 이미지와 유머러스한 카피를 함께 사용해 즐거운 브랜딩 무드를 담은 디저트 포스터입니다."
+                          data-intent="촘촘하게 배열한 도넛 사진을 중앙에 크게 배치해 제품의 식감과 토핑을 먼저 보이게 만들고, 강한 블랙 세리프 타이포로 ‘Donut Worry, Be Happy’ 문구를 상하에 감싸듯 배치해 위트 있는 메시지를 전달합니다. 밝은 핑크 배경과 은은한 패턴으로 달콤한 분위기를 더해 디저트 브랜드의 긍정적인 이미지를 강조했습니다."
+                          data-tags="poster<sup>2</sup>,design">
+                          <span>(SHOW DESIGN)</span>
+                        </a>
+                      </figure>
+                      <div class="pop-up__info">
+                        <h3 class="pop-up__name">Donut Worry, Be Happy poster</h3>
+                        <p class="pop-up__sub">도넛 실사와 유머 있는 카피를 결합해 밝고 즐거운 브랜딩을 보여주는 디저트 포스터입니다.</p>
+                      </div>
+                    </article>
+                  </li>
+
+                  <!-- 5. Music Festival 포스터 -->
+                  <li class="swiper-slide pop-up__item">
+                    <article class="pop-up__card">
+                      <figure class="pop-up__thumb">
+                        <img src="./img/poster/music.jpg" alt="Music Festival 포스터">
+                        <!--  hover overlay -->
+                        <a href="#"
+                          class="pop-up__overlay"
+                          data-title="Music Festival poster"
+                          data-desc="도트 패턴의 사진과 굵은 타이포로 여름 음악 페스티벌의 에너지를 담은 행사 포스터입니다."
+                          data-intent="단색 블루를 기반으로 사진 전체에 하프톤 도트 효과를 적용해 레트로하면서도 힘 있는 질감을 만들었습니다. 상단에는 볼륨감 있는 라운드 타이포로 ‘Music festival’ 문구를 크게 배치해 행사명을 가장 먼저 인지하게 하고, 하단에는 일정과 장소, 장르 정보를 정돈된 그리드로 배치해 정보를 한 번에 파악할 수 있도록 설계했습니다. 전체를 하나의 컬러로 통일해 인쇄 매체에서도 임팩트 있게 보이도록 구성했습니다."
+                          data-tags="poster<sup>2</sup>,design">
+                          <span>(SHOW DESIGN)</span>
+                        </a>
+                      </figure>
+                      <div class="pop-up__info">
+                        <h3 class="pop-up__name">Music Festival poster</h3>
+                        <p class="pop-up__sub">블루 단색과 하프톤 사진, 볼륨감 있는 타이포로 여름 페스티벌의 리듬감과 에너지를 표현한 행사 포스터입니다.</p>
+                      </div>
+                    </article>
+                  </li>
+
+                  <!-- 6. Save the Earth – 포스터 02 (오렌지 배경) -->
+                  <li class="swiper-slide pop-up__item">
+                    <article class="pop-up__card">
+                      <figure class="pop-up__thumb">
+                        <img src="./img/poster/earth2.jpg" alt="Save the Earth 포스터 2">
+                        <!--  hover overlay -->
+                        <a href="#"
+                          class="pop-up__overlay"
+                          data-title="Save the Earth poster 02"
+                          data-desc="뜨거운 오렌지 배경 위에서 사람들이 지구를 붙잡고 있는 장면으로, 기후 위기의 긴박함을 표현한 환경 포스터입니다."
+                          data-intent="블루와 그린으로 표현된 지구를 중앙에 크게 두고, 사방에서 잡고 있는 손을 통해 ‘우리가 함께 붙잡아야 지킬 수 있다’는 메시지를 시각화했습니다. 강렬한 오렌지 배경은 지구 온난화의 뜨거운 온도를 상징하며, 상·하단의 ‘SAVE THE EARTH / SAVE OURSELVES’ 타이포로 카피와 이미지를 하나의 구호처럼 묶어줍니다. 하단의 짧은 문장은 메시지를 다시 한 번 직접적으로 전달해 캠페인 포스터로서의 설득력을 높였습니다."
+                          data-tags="poster<sup>2</sup>,design">
+                          <span>(SHOW DESIGN)</span>
+                        </a>
+                      </figure>
+                      <div class="pop-up__info">
+                        <h3 class="pop-up__name">Save the Earth poster 02</h3>
+                        <p class="pop-up__sub">뜨거운 오렌지 배경과 지구를 붙잡은 손 모티브로 기후 위기의 긴장감을 표현한 두 번째 환경 포스터입니다.</p>
+                      </div>
+                    </article>
+                  </li>
+                </ul>
+
+                <!-- 모바일용 스크롤바 or 도트 -->
+                <div class="swiper-scrollbar pop-up__scrollbar"></div>
+              </div>
+            </div>
+          </section>
 
 
       </div>   
@@ -406,7 +831,8 @@ Styled-components나 CSS 모듈을 활용해 각 요소별 스타일을 효율�
       </figure>
 
       <div class="design-modal__text">
-        <h1>design <span>info</span> </h1>
+      <div class="design-modal__tags"></div> 
+        <h1>Project info </h1>
         <h3 id="designModalTitle">Title</h3>
         <!-- 서브 설명(간단 설명/카피 문구) -->
         <p id="designModalDesc" class="design-modal__desc">Description</p>
@@ -476,7 +902,7 @@ speed: 900,        // 슬라이드 넘어가는 애니메이션 속도 (1초 정
       0:    { slidesPerView: 1.1, spaceBetween: 14 },
       500:  { slidesPerView: 2.1, spaceBetween: 60 },
       1024: { slidesPerView: 3.5,   spaceBetween: 70 },
-      1600: { slidesPerView: 4,   spaceBetween: 130 },
+      1600: { slidesPerView: 4.5,   spaceBetween: 130 },
     },
   });
 </script>

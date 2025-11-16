@@ -6,6 +6,9 @@ html{
   font-size: 18px;
   color: #3d3d3d;
 }
+html {
+  scroll-behavior: smooth;
+}
 p{
   line-height: 1.5;
   font-size: 0.8rem;
@@ -14,56 +17,19 @@ p{
   width: auto;
   /* margin: 0 5rem; */
 }
- /* ===== Scroll-snap 컨테이너 ===== */
-/* ===== 오버레이 안에서 클릭/드래그 허용할 영역들 ===== */
 
-/* 헤더 전체(메뉴 클릭 가능) */
-.overlay-contents header,
-.overlay-contents header a,
-.menu-mo,
-.menu-close
- {
-  pointer-events: auto;
-}
 
-/* About 섹션 (텍스트/링크) */
-.overlay-contents .about a {
-  pointer-events: auto;
-}
-
-/* Skills 섹션 + Swiper */
-.overlay-contents .skills .swiper,
-.overlay-contents .skills .swiper * {
-  pointer-events: auto;
-}
-
-/* footer도 클릭 필요하면 */
-.overlay-contents .footer {
-  pointer-events: auto;
-}
-.overlay-contents {
-  position: relative;
-  z-index: 10;
-  pointer-events: none;
-}
-  .snap {
-  position: fixed;
-  overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  z-index: 0;
-  left: 0;
-  top: 0;
-  /* pointer-events: none; */
-}
+/* ============포인터 */
   /* section{
     height:100vh; scroll-snap-align:start;
   } */
 
   .long-wrap {
     /* height: 400vh; */
+    z-index: 5;
     position: relative;
-    /* pointer-events: none; */
+    pointer-events: auto;
+    /* 이거 키면 포인터 효과 따라옴 */
 }
 .lil-gui { display: none !important; }
 
@@ -73,8 +39,9 @@ p{
     inset: 0;            /* top:0; right:0; bottom:0; left:0; */
     width: 100%;
     height: 100%;
-    z-index: 0;          /* 가장 뒤 */
+    z-index: -1;          /* 가장 뒤 */
     display: block;
+    pointer-events: none; 
   }
 
   /* 위에 얹힐 텍스트 (앞) */
@@ -88,7 +55,7 @@ p{
     z-index: 10;
     color: #3d3d3d;
     /* font-family: "Pretendard", "Inter", system-ui, -apple-system, sans-serif; */
-    /* pointer-events: auto; */
+    pointer-events: auto;
 }
 
 .txt {
@@ -141,7 +108,7 @@ p{
     font-family: 'newyork';
     font-size: 2rem;
     line-height: 0.8;
-    margin-left: 4.5rem;
+    margin-left: 6.5rem;
   }
 .slogan {
     position: absolute;
@@ -451,9 +418,68 @@ font-weight: 600;
   padding: 0 1rem;
   font-family: 'newyork'
 }
+/* ============project intro=========== */
+.project-intro .tag-chip{
+  margin-bottom: 0;
+  margin-top: 1.5rem;
+  /* font-size: 0.8rem; */
+}
+.project-intro h1{
+  font-size: 6rem;
+  font-family: 'newyork';
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.project-li{
+border-bottom: 1px solid #3d3d3d;
+}
+.project-txt{
+  display: flex;
+}
+.project-txt h3{
+  flex:2;
+}
+.project-d-ul{
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.project-d-ul li{
+  list-style: circle;
+}
+.project-intro h3{
+  font-family: 'newyork';
+  font-size: 3rem;
+  padding-bottom: 1rem;
+}
+.project-li-last{
+  border-bottom: none;
+  display: flex;
+  justify-content: center;
+}
+.project-li-last>.project-txt{
+  flex-direction: column;
+}
+.project-d-ul-last{
+  margin-left: 1rem;
+}
+.project-d-ul-last li{
+  list-style: circle;
+  font-size: 0.8rem;
+}
+.project-etc h3{
+  font-size: 2rem;
+}
+
 /* ============project pop-up*/
+
+#pop-up {
+  scroll-margin-top: 6rem; /* 고정 헤더 있을 때 유용함 */
+}
 .pop-up{
   margin-top: 6rem;
+  margin-bottom: 6rem;
 }
 .pop-up__scrollbar {
   height: 4px;
@@ -468,14 +494,20 @@ font-weight: 600;
       height: 100%;
       object-fit: cover;
     } */
-
+.design-modal__tags {
+    display: flex;
+    gap: 0.5rem;
+}
 .tag-chip{
   border: 1px solid #3d3d3d;
   text-transform: uppercase;
   border-radius: 20px;
   padding: 5px 10px ;
-  /* color: #2055CA; */
+  /* height: 26px; */
   margin-bottom: 1rem;
+}
+.design-modal__text h1{
+  font-family: 'newyork';
 }
 .pop-up__title{
   font-family: 'zal';
@@ -484,10 +516,7 @@ font-weight: 600;
   font-size: 2rem;
   /* color: #2055CA; */
 }
-.pop-up__title span{
-  font-family: 'newyork';
-  /* color: #2055CA; */
-}
+
 .pop-up__desc{
   font-size: 0.8rem;
   /* color: #2055CA; */
@@ -503,6 +532,7 @@ font-weight: 600;
 .pop-up__name {
     text-transform: uppercase;
     font-family: 'zal';
+    font-weight: 600;
     color: #2055CA;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -525,7 +555,7 @@ font-weight: 600;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.4);
 
   display: flex;
   align-items: center;
@@ -550,11 +580,15 @@ font-weight: 600;
   opacity: 1;
   pointer-events: auto;
 }
-/* 기본은 숨김 */
+
+
+/* ============ MODAL (최종 정리본) ============ */
+
+/* 모달 전체 래퍼 */
 .design-modal {
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: 1000;
   display: none;
 }
 
@@ -562,68 +596,92 @@ font-weight: 600;
 .design-modal.is-open {
   display: block;
 }
-.design-modal__close {
-    position: absolute;
-    color: #2055CA;
-    top: 1rem;
-    right: 1rem;
-    /* width: 100%; */
-    font-size: 1rem;
-    /* height: 3rem; */
-    /* text-align: right; */
-}
+
+/* 어두운 오버레이 */
 .design-modal__overlay {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.5);
 }
 
+/* 닫기 버튼 */
+.design-modal__close {
+  position: absolute;
+  color: #2055CA;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1rem;
+}
+
+/* 흰 모달 박스 */
 .design-modal__content {
-    position: relative;
-    max-width: 1000px;
-    margin: 5vh auto;
-    background: #fff;
-    /* border-radius: 16px; */
-    padding: 4rem;
-    z-index: 1;
+  position: relative;
+  max-width: 1000px;
+  width: min(1000px, calc(100% - 4rem));
+  margin: 5vh auto;
+  background: #fff;
+  padding: 4rem 3rem;
+  z-index: 1;
+
+  max-height: 90vh;        /* 화면 안에 고정 */
+  overflow: hidden;        /* 전체는 고정, 안쪽에서만 스크롤 */
 }
-.modal__box{
+
+/* 내부 레이아웃 박스 */
+.modal__box {
   display: flex;
-  gap: 5rem;
+  gap: 3rem;
+  min-height: 0;
+  align-items: flex-start;
 }
+
+/* ✨ 포스터만 스크롤 영역 (여기 핵심!) */
 .design-modal__figure{
   flex: 2;
+  max-height: 70vh;            /* ← 숫자로 강제 제한 (예: 70vh) */
+  overflow-y: auto;            /* 포스터만 스크롤 */
+  -webkit-overflow-scrolling: touch;
+  min-height: 0;
 }
+
+/* 포스터 이미지 */
+.design-modal__figure img {
+  width: 100%;
+  display: block;
+}
+
+/* 텍스트 영역 */
 .design-modal__text{
   flex: 1;
   color: #3d3d3d;
   padding: 1rem 0;
 }
-.design-modal__figure img {
-  width: 100%;
-  display: block;
-  /* border-radius: 12px; */
+
+
+.design-modal__tags {
+  display: flex;
+  gap: 0.5rem;
 }
-#designModalTitle {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-}
+
 .design-modal__desc{
   padding-bottom: 3rem;
   border-bottom: 1px solid #3d3d3d;
 }
 .design-modal__subtitle {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 .design-modal__text h1{
   font-size: 2rem;
+  font-family: 'newyork';
   padding-bottom: 2rem;
   border-bottom: 1px solid #3d3d3d;
 }
 .design-modal__text span{
   font-family: 'newyork';
 }
-
+#designModalTitle{
+  margin-top: 1rem;
+  font-weight: 600;
+}

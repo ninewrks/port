@@ -120,7 +120,7 @@ function updateTextCanvas() {
     (params.fontSize * devicePixelRatio) + "px " +
     fontOptions[params.fontName];
 
-  textureCtx.fillStyle = "#ffff";
+  textureCtx.fillStyle = "#fff";
   textureCtx.textAlign = "center";
   textureCtx.filter = "blur(3px)";
 
@@ -365,23 +365,21 @@ if (isMobile) {
 // Events
 // ===============================
 function setupEvents() {
-  // PC 마우스 움직임
-  canvasEl.addEventListener("mousemove", (e) => {
+  // ✅ PC 마우스: 화면 전체에서 포인터 좌표 받기
+  window.addEventListener("mousemove", (e) => {
     isPreview = false;
     updateMousePosition(e.clientX, e.clientY);
   });
 
-  // 모바일 터치 움직임
-  canvasEl.addEventListener("touchmove", (e) => {
-    // ❌ e.preventDefault(); 절대 쓰지 말기
-    // => 써버리면 스크롤이 막혀버려
-
+  // ✅ 모바일 터치: 마찬가지로 window에서 받기
+  window.addEventListener("touchmove", (e) => {
     isPreview = false;
     const t = e.touches[0] || e.targetTouches[0];
     if (!t) return;
     updateMousePosition(t.clientX, t.clientY);
-  }, { passive: true }); // 브라우저에게 "스크롤 안 막을게요" 라고 알려줌
+  }, { passive: true });
 }
+
 
 function updateMousePosition(eX, eY) {
   pointer.moved = true;

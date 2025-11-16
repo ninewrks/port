@@ -119,22 +119,18 @@
     gap: 1rem;
     margin-bottom: 3rem;
 }
-.modal__box {
-    display: flex;
+/* 모바일에선 세로로 쌓기 */
+  .modal__box {
     flex-direction: column;
-    gap: 3rem;
-}
-  /* ① 모달 래퍼 자체에서 스크롤 허용 */
-  .design-modal {
-    position: fixed;
-    inset: 0;
-      overflow-y: auto;
- /* ② 모달 콘텐츠 높이 제한 + 내부 스크롤 */
-  .design-modal__content {
-    max-height: 90vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 2rem; /* 모바일 여백 축소 */
+    gap: 2rem;
   }
-}
+
+  .design-modal__content {
+    width: calc(100% - 2rem);
+    padding: 2rem 1.5rem;
+  }
+
+  .design-modal__figure {
+    max-height: 50vh;  /* 위쪽 포스터 영역만 스크롤 */
+  }
 }

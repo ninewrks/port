@@ -84,3 +84,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+const overlays = document.querySelectorAll('.pop-up__overlay');
+const modal = document.getElementById('designModal');
+
+overlays.forEach(overlay => {
+  overlay.addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // 기본 정보
+    document.getElementById('designModalTitle').textContent = this.dataset.title;
+    document.getElementById('designModalDesc').textContent  = this.dataset.desc;
+    document.getElementById('designModalIntent').textContent = this.dataset.intent;
+
+    // ⭐ 태그 읽기
+    const tagBox = modal.querySelector('.design-modal__tags');
+    tagBox.innerHTML = ''; // 초기화
+
+    if (this.dataset.tags) {
+      const tags = this.dataset.tags.split(',');
+      tags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'tag-chip';
+        btn.innerHTML = tag.trim();
+        tagBox.appendChild(btn);
+      });
+    }
+
+    // 이미지 세팅
+    document.getElementById('designModalImg').src =
+      this.parentElement.querySelector('img').src;
+
+    modal.classList.add('is-open');
+  });
+});
+
