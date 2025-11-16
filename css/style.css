@@ -1,6 +1,8 @@
 html, body { height: 100%; margin: 0; }
 html{
-  font-family: 'sans';
+  font-family: 
+  'zal',
+  'sans';
   font-size: 18px;
   color: #3d3d3d;
 }
@@ -594,7 +596,7 @@ font-weight: 600;
 }
 .design-modal__text{
   flex: 1;
-  color: #2055CA;
+  color: #3d3d3d;
   padding: 1rem 0;
 }
 .design-modal__figure img {
@@ -602,17 +604,26 @@ font-weight: 600;
   display: block;
   /* border-radius: 12px; */
 }
-#designModalTitle{
-  margin-bottom: 1rem;
-  font-weight: 600;
+#designModalTitle {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
 }
 .design-modal__desc{
   padding-bottom: 3rem;
-  border-bottom: 1px solid #2055CA;
+  border-bottom: 1px solid #3d3d3d;
 }
 .design-modal__subtitle {
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: 600;
+}
+.design-modal__text h1{
+  font-size: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #3d3d3d;
+}
+.design-modal__text span{
+  font-family: 'newyork';
 }
 

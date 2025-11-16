@@ -8,6 +8,15 @@
         transform: translateX(-50%);
         bottom: 12rem;
     }
+    .ideas {
+    width: max-content;
+}
+    .job {
+    gap: 1rem;
+}
+.txt {
+    padding: 1rem;
+}
     /* =========header========== */
     .skills h1 {
     margin-right: 0;
@@ -16,6 +25,9 @@
     /* =========about=========== */
 .common-frame {
     margin: 0 1rem;
+}
+.about .t1 {
+    margin-left: 3rem;
 }
 .about{
         flex-direction: column;
@@ -74,9 +86,9 @@
 }
 
 .cert-item {
-    flex-direction: column;
-    padding: 1rem;
-    gap: 0.5rem;
+    padding: 1.2rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
 .cert-name {
@@ -86,6 +98,7 @@
     padding-bottom: 0.5rem;
     /* font-size: 0.75rem; */
 }
+
 
 .cert-org,
 .cert-date {
@@ -105,5 +118,20 @@
     grid-template-columns: 1fr;
     gap: 1rem;
     margin-bottom: 3rem;
+}
+.modal__box {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+.design-modal__content {
+    max-width: 1000px;
+    overflow: scroll;
+    /* height: 100vh; */
+    /* margin: 5vh auto; */
+    background: #fff;
+    /* border-radius: 16px; */
+    padding: 4rem 1rem;
+    z-index: 1;
 }
 }
