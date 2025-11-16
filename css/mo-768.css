@@ -18,6 +18,9 @@
     padding: 1rem;
 }
     /* =========header========== */
+    header {
+    padding: 0.5rem 2rem;
+}
     .skills h1 {
     margin-right: 0;
     font-size: 6rem;
@@ -112,6 +115,16 @@
     padding-right: 2rem;
     font-size: 0.8rem;
 }
+/* ===============project-index */
+.project-txt {
+    flex-direction: column;
+    
+}
+.project-li-last {
+    border-bottom: none;
+    display: flex;
+    justify-content: left;
+}
 /* ===============pop-up */
  /* 타이틀 영역: 한 줄 → 세로 쌓기 */
   .pop-up__title-area {
@@ -130,7 +143,7 @@
   /* 모달 '박스' 안에서만 스크롤되게 */
 .design-modal__content {
     width: calc(100% - 2rem);
-    padding: 1rem;
+    padding: 4rem 1rem;
     height: 100vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -143,5 +156,11 @@
   }
   .project-intro h1 {
     margin-top: 6rem;
+}
+
+}
+@media(max-width:320px){
+    .project-d-ul {
+    grid-template-columns: 1fr;
 }
 }

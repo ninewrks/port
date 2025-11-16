@@ -419,10 +419,14 @@ font-weight: 600;
   font-family: 'newyork'
 }
 /* ============project intro=========== */
-.project-intro .tag-chip{
-  margin-bottom: 0;
-  margin-top: 1.5rem;
-  /* font-size: 0.8rem; */
+.tag-chip {
+    border: 1px solid #3d3d3d;
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 0.25rem 0.5rem;
+    /* height: 26px; */
+    /* margin-bottom: 1rem; */
+  
 }
 .project-intro h1{
   font-size: 6rem;
@@ -431,8 +435,9 @@ font-weight: 600;
   margin-bottom: 3rem;
 }
 
-.project-li{
-border-bottom: 1px solid #3d3d3d;
+.project-li {
+    border-bottom: 1px solid #3d3d3d;
+    padding: 0.5rem;
 }
 .project-txt{
   display: flex;
@@ -453,10 +458,11 @@ border-bottom: 1px solid #3d3d3d;
   font-size: 3rem;
   padding-bottom: 1rem;
 }
-.project-li-last{
-  border-bottom: none;
-  display: flex;
-  justify-content: center;
+.project-li-last {
+    border-bottom: none;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
 }
 .project-li-last>.project-txt{
   flex-direction: column;
@@ -470,6 +476,9 @@ border-bottom: 1px solid #3d3d3d;
 }
 .project-etc h3{
   font-size: 2rem;
+}
+#other-tag{
+  font-size: 0.5rem;
 }
 
 /* ============project pop-up*/
@@ -498,14 +507,7 @@ border-bottom: 1px solid #3d3d3d;
     display: flex;
     gap: 0.5rem;
 }
-.tag-chip{
-  border: 1px solid #3d3d3d;
-  text-transform: uppercase;
-  border-radius: 20px;
-  padding: 5px 10px ;
-  /* height: 26px; */
-  margin-bottom: 1rem;
-}
+
 .design-modal__text h1{
   font-family: 'newyork';
 }
@@ -515,6 +517,9 @@ border-bottom: 1px solid #3d3d3d;
   font-weight: 300;
   font-size: 2rem;
   /* color: #2055CA; */
+}
+.pop-up__title span{
+  font-family: 'newyork';
 }
 
 .pop-up__desc{
@@ -610,7 +615,7 @@ border-bottom: 1px solid #3d3d3d;
   color: #2055CA;
   top: 1rem;
   right: 1rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 /* 흰 모달 박스 */
