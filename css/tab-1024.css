@@ -114,4 +114,23 @@
     padding-right: 2rem;
     font-size: 0.8rem;
   }
+  /* =============project index */
+  .p-title {
+    flex: 1;
+    display: block;
+    flex-direction: column;
+    /* align-items: center; */
+    margin-bottom: 1rem;
+}
+.project-intro h3 {
+
+    font-size: 2rem;
+}
+/* ======slide button */
+.swiper-button-next{
+  height: 20px !important;
+}
+.swiper-button-prev{
+  height: 20px !important;
+}
 }

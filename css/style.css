@@ -6,6 +6,7 @@ html{
   font-size: 18px;
   color: #3d3d3d;
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -192,8 +193,8 @@ header ul {
 
   .t1 a {
     font-weight: 600;
-    color: #2055CA;
-    border-bottom: 1px solid #2055CA;
+    color: var( --deep);
+    border-bottom: 1px solid var( --deep);
     display: flex;
     align-items: flex-end;
     width: fit-content;
@@ -224,7 +225,7 @@ header ul {
 header ul li{
     text-transform: uppercase;
     font-family: 'zal';
-    color: #2055CA;
+    color: var( --deep);
 }
 .common-frame{
     margin: 0 5rem;
@@ -239,7 +240,7 @@ header ul li{
 .about h1 {
     font-size: 6rem;
     font-family: 'newyork';
-    color: #2055CA;
+    color: var( --deep);
     margin-top: 3rem;
     /* margin-bottom: 1rem; */
 }
@@ -251,7 +252,7 @@ header ul li{
 .self {
     font-size: 1rem;
     margin-top: 1rem;
-    color: #2055CA;
+    color: var( --deep);
     line-height: 1.3;
 }
 .self span{
@@ -391,7 +392,7 @@ font-weight: 600;
 .skill-slide{
   /* display: flex !important;
   align-items: center !important; */
-  color: #2055CA;
+  color: var( --deep);
 }
 .skill-wrap {
     height: auto !important;
@@ -406,7 +407,7 @@ font-weight: 600;
     margin-bottom: 1rem;
     width: 100% !important;
     height: 200px;
-    border-top: 1px solid #2055CA;
+    border-top: 1px solid var( --deep);
     padding: 1rem 0;
 }
 .skill-box p {
@@ -442,9 +443,15 @@ font-weight: 600;
 .project-txt{
   display: flex;
 }
-.project-txt h3{
-  flex:2;
+.p-title {
+    flex: 2;
+    display: flex;
+    align-items: center;
 }
+.p-title p{
+    width: 20rem;
+}
+
 .project-d-ul{
   flex: 1;
   display: grid;
@@ -453,16 +460,18 @@ font-weight: 600;
 .project-d-ul li{
   list-style: circle;
 }
-.project-intro h3{
-  font-family: 'newyork';
-  font-size: 3rem;
-  padding-bottom: 1rem;
+.project-intro h3 {
+    width: 26rem;
+    font-family: 'newyork';
+    font-size: 2.5rem;
+    padding-bottom: 1rem;
 }
 .project-li-last {
     border-bottom: none;
     display: flex;
     justify-content: center;
     padding: 1rem;
+    margin-top: 5rem;
 }
 .project-li-last>.project-txt{
   flex-direction: column;
@@ -476,6 +485,12 @@ font-weight: 600;
 }
 .project-etc h3{
   font-size: 2rem;
+  width: auto;
+}
+.project-etc p{
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
+  width: auto;
 }
 #other-tag{
   font-size: 0.5rem;
@@ -491,8 +506,10 @@ font-weight: 600;
   height: 4px;
   background: #dbe3ff; /* 옅은 잉크 */
 }
-.pop-up__scrollbar .swiper-scrollbar-drag {
-  background: #2055CA; 
+.pop-up__scrollbar .swiper-scrollbar-drag,
+.banner-swiper-scrollbar .swiper-scrollbar-drag
+ {
+  background: #bebebe; 
 }
     /* .swiper-slide img {
       display: block;
@@ -513,7 +530,7 @@ font-weight: 600;
   /* text-transform: uppercase; */
   font-weight: 300;
   font-size: 2rem;
-  /* color: #2055CA; */
+  /* color: var( --deep); */
 }
 .pop-up__title span{
   font-family: 'newyork';
@@ -521,7 +538,7 @@ font-weight: 600;
 
 .pop-up__desc{
   font-size: 0.8rem;
-  /* color: #2055CA; */
+  /* color: var( --deep); */
 }
 .pop-up__title-area {
     display: grid;
@@ -535,12 +552,12 @@ font-weight: 600;
     text-transform: uppercase;
     font-family: 'zal';
     font-weight: 600;
-    color: #2055CA;
+    color: var( --deep);
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .pop-up__sub {
-    color: #2055CA;
+    color: var( --deep);
     font-size: 0.7rem;
 }
 .pop-up__thumb {
@@ -574,7 +591,7 @@ font-weight: 600;
     font-size: 1.2rem;
     /* letter-spacing: 0.15em; */
     /* text-transform: uppercase; */
-    color: #2055CA;
+    color: var( --deep);
     /* font-weight: 600; */
 }
 /* hover 시 오버레이 활성화 */
@@ -609,7 +626,7 @@ font-weight: 600;
 /* 닫기 버튼 */
 .design-modal__close {
   position: absolute;
-  color: #2055CA;
+  color: var( --deep);
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
@@ -688,3 +705,28 @@ font-weight: 600;
 }
 /* ============각섹션 마진  */
 section{margin-bottom: 10rem;}
+/* ============other archive */
+.a-project-etc {
+    font-family: 'newyork';
+    font-size: 3rem;
+    margin-bottom: 3rem;
+}
+.a-project-txt{
+  display:flex ;
+  justify-content: center;
+}
+.a-fold{
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.a-project-etc p{
+  text-align: center;
+}
+.a-fold figcaption{
+  font-size: 0.8rem;
+  width: 150px;
+}
+.a-fold img{
+  width: 150px;
+}

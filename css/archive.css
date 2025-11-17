@@ -1,0 +1,50 @@
+html, body { height: 100%; margin: 0; }
+html{
+  font-family: 
+  'zal',
+  'sans';
+  font-size: 18px;
+  color: #3d3d3d;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+p{
+  line-height: 1.5;
+  font-size: 0.8rem;
+}
+.wide-frame {
+  width: auto;
+  /* margin: 0 5rem; */
+}
+.lil-gui { display: none !important; }
+
+/* 배경처럼 화면을 덮는 WebGL 캔버스 (뒤) */
+  canvas {
+    position: fixed;     /* 화면 고정 */
+    inset: 0;            /* top:0; right:0; bottom:0; left:0; */
+    width: 100%;
+    height: 100%;
+    z-index: -1;          /* 가장 뒤 */
+    display: block;
+    pointer-events: none; 
+  }
+
+  /* 위에 얹힐 텍스트 (앞) */
+  .archive-contents {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
+    z-index: 10;
+    color: #3d3d3d;
+    /* font-family: "Pretendard", "Inter", system-ui, -apple-system, sans-serif; */
+    pointer-events: auto;
+}
+.a-fold{
+    display: flex;
+    align-items: center;
+}
