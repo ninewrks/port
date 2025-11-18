@@ -192,30 +192,47 @@
     }
 </script>
 
-</script>
     <script type="module" src="./js/script.js"></script>
 
-    <div class="wide-frame">
+<div class="wide-frame">
         <div class="common-frame">
              <section class="archive-section" id="character">
-                <button type="button" class="tag-chip" id="other-tag">Creative<sup>etc</sup></button>
-                <h2>(3D Works and goods)</h2>
-                <p>노마드스컬프로 만든 3D 실험작과 
+                  <button type="button" class="tag-chip" id="other-tag">
+                    Creative<sup>etc</sup>
+                  </button>
+              
+                  <h2>(3D Works and goods)</h2>
+                  <p>
+                    노마드스컬프로 만든 3D 실험작과 
                     엽서·스티커·키링 굿즈 제작을 하나의 흐름으로 구성한 작업입니다.
-                    아이디어를 입체와 실물 제작으로 확장한 결과물들입니다.</p>
+                    아이디어를 입체와 실물 제작으로 확장한 결과물들입니다.
+                  </p>
+              
+                  <div class="masonry char-gallery">
+                
+                    <!-- 영상: 모바일 자동재생 대응 -->
+                    <video class="char-media" autoplay muted playsinline loop preload="auto">
+                      <source src="./img/arc2/cloud.MP4" type="video/mp4" />
+                    </video>
+                
+                    <img src="./img/arc2/travel.jpg" alt="여행 느낌 일러스트 or 컷" class="char-img">
+                
+                    <img src="./img/arc2/key.png" alt="푸덩이 키링" class="char-img">
+                
+                    <!-- 3D 소금빵 영상 -->
+                    <video class="char-media" autoplay muted playsinline loop preload="auto">
+                      <source src="./img/arc2/sogm.mov" type="video/mp4" />
+                    </video>
+                
+                    <img src="./img/arc2/post.png" alt="뿌덕이 엽서" class="char-img">
+                
+                    <img src="./img/arc2/mz.jpg" alt="뿌덕이 스티커 도안" class="char-img">
+                
+                    <img src="./img/arc2/travel.jpg" alt="여름여행 뿌덕이 스티커도안" class="char-img">
+                
+                  </div>
+            </section>
 
-            <div class="masonry char-gallery">   
-              <video class="char-media" src="./img/arc2/cloud.MP4" autoplay muted loop></video>
-              <video class="char-media" src="./img/arc2/travel.jpg" autoplay muted loop></video>
-              <img src="./img/arc2/key.png" alt="푸덩이 키링" class="char-img">
-              <video class="char-media" src="./img/arc2/sogm.mov" autoplay muted loop></video>
-              <img src="./img/arc2/post.png" alt="뿌덕이 엽서" class="char-img">
-              <img src="./img/arc2/mz.jpg" alt="뿌덕이 스티커도안" class="char-img">
-              <img src="./img/arc2/travel.jpg" alt="여름여행 뿌덕이 스티커도안" class="char-img">
-            </div>   
-        </div>
-    </div>
-        </section>
 
 <!-- 라이트박스 모달 하나 -->
 <div id="lightbox" class="lightbox">

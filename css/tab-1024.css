@@ -133,4 +133,8 @@
 .swiper-button-prev{
   height: 20px !important;
 }
+/* ========detail page */
+.detail-swiper figure{
+  height: 300px;
+}
 }

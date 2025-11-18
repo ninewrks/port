@@ -730,3 +730,68 @@ section{margin-bottom: 10rem;}
 .a-fold img{
   width: 150px;
 }
+/* ========detail page */
+.detail-swiper figure{
+  height: 700px;
+}
+
+/* =========footer */
+.end-banner {
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 1.2rem 0;
+    background-color: #fffbdb;
+    height: 30px;
+}
+
+.end-track {
+  display: flex;
+  white-space: nowrap;
+  gap: 4rem; /* 문장 사이 간격 */
+  animation: slide 20s linear infinite;
+}
+
+.end-track span {
+  font-size: 1.4rem;
+  opacity: 0.85;
+  display: inline-block;
+}
+
+/* 슬라이드 애니메이션 */
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/* .footer{margin: 1rem;} */
+.back {
+    background-color: var(--deep);
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.b-logo{
+  height: 200px;
+  margin-bottom: 2rem;
+}
+.last-job {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    color: #fffbdb;
+    font-weight: 2rem;
+    margin-bottom: 1rem;
+}
+.last-job img{
+  height: 16px;
+}
+.back p{
+  text-align: center;
+  color: #fffbdb;
+}

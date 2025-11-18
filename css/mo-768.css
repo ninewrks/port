@@ -178,9 +178,28 @@
 .a-fold figcaption{
   width: 90px;
 }
+/* ==============footer */
+.last-job {
+    gap: 1rem;
+    font-size: 0.8rem;
+}
+.last-job img {
+    height: 10px;
+}
+.b-logo {
+    height: 100px;
+}
 }
 @media(max-width:320px){
     .project-d-ul {
     grid-template-columns: 1fr;
+}
+.b-logo {
+    margin-top: 5rem;
+    height: 70px;
+}
+.end-banner {
+    padding: 0.8rem 0;
+    height: 26px;
 }
 }
