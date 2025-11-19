@@ -18,6 +18,9 @@ p{
   width: auto;
   /* margin: 0 5rem; */
 }
+button{
+  color: #3d3d3d;
+}
 
 
 /* ============포인터 */
@@ -438,7 +441,7 @@ font-weight: 600;
 
 .project-li {
     border-bottom: 1px solid #3d3d3d;
-    padding: 0.5rem;
+    padding: 1rem;
 }
 .project-txt{
   display: flex;
@@ -479,9 +482,10 @@ font-weight: 600;
 .project-d-ul-last{
   margin-left: 1rem;
 }
-.project-d-ul-last li{
-  list-style: circle;
-  font-size: 0.8rem;
+.project-d-ul-last li {
+    list-style: circle;
+    font-size: 0.8rem;
+    padding: 0.5rem;
 }
 .project-etc h3{
   font-size: 2rem;
@@ -557,7 +561,7 @@ font-weight: 600;
     margin-bottom: 0.5rem;
 }
 .pop-up__sub {
-    color: var( --deep);
+    /* color: var( --deep); */
     font-size: 0.7rem;
 }
 .pop-up__thumb {
@@ -625,25 +629,24 @@ font-weight: 600;
 
 /* 닫기 버튼 */
 .design-modal__close {
-  position: absolute;
-  color: var( --deep);
+  position: absolute;      /* fixed → absolute */
   top: 1rem;
   right: 1rem;
   font-size: 1.5rem;
+  color: var(--deep);
+  z-index: 2;              /* 내용 위로 올라오게 */
 }
 
-/* 흰 모달 박스 */
 .design-modal__content {
-  position: relative;
-  max-width: 1000px;
-  width: min(1000px, calc(100% - 4rem));
-  margin: 5vh auto;
-  background: #fff;
-  padding: 4rem 3rem;
-  z-index: 1;
-
-  max-height: 90vh;        /* 화면 안에 고정 */
-  overflow: hidden;        /* 전체는 고정, 안쪽에서만 스크롤 */
+    position: relative;
+    max-width: 1000px;
+    /* width: min(1000px, calc(100% - 4rem)); */
+    margin: 5vh auto;
+    background: #fff;
+    padding: 4rem 3rem;
+    z-index: 1;
+    max-height: 90vh;
+    overflow: hidden;
 }
 
 /* 내부 레이아웃 박스 */
@@ -654,12 +657,12 @@ font-weight: 600;
   align-items: flex-start;
 }
 /* ✨ 포스터만 스크롤 영역 (여기 핵심!) */
-.design-modal__figure{
-  flex: 2;
-  max-height: 70vh;            /* ← 숫자로 강제 제한 (예: 70vh) */
-  overflow-y: auto;            /* 포스터만 스크롤 */
-  -webkit-overflow-scrolling: touch;
-  min-height: 0;
+.design-modal__figure {
+    flex: 2;
+    max-height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    min-height: 0;
 }
 
 /* 포스터 이미지 */
@@ -669,16 +672,17 @@ font-weight: 600;
 }
 
 /* 텍스트 영역 */
-.design-modal__text{
-  flex: 1;
-  color: #3d3d3d;
-  padding: 1rem 0;
+.design-modal__text {
+    flex: 1;
+    color: #3d3d3d;
+    padding: 1rem 0;
+    margin-bottom: 10rem;
 }
 
 
 .design-modal__tags {
-  display: flex;
-  gap: 0.5rem;
+    display: inline-flex;
+    gap: 0.5rem;
 }
 
 .design-modal__desc{

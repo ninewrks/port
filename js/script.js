@@ -50,6 +50,11 @@ const pointer = { x: 0, y: 0, dx: 0, dy: 0, moved: false };
 let outputColor, velocity, divergence, pressure, canvasTexture;
 let isPreview = true;
 
+// ✅ 프리뷰(자동 윙윙) 유지 관련 상태
+let hasUserInteracted = false; // 진짜로 마우스/터치가 움직였는지
+let previewEndTime = null;     // 프리뷰 종료 시각 (ms)
+const PREVIEW_MIN_DURATION = 5500; // 최소 5.5초는 혼자 돈다
+
 const gl = canvasEl.getContext("webgl");
 gl.getExtension("OES_texture_float");
 
@@ -258,35 +263,55 @@ function render(t) {
   const dt = 1 / 60;
 
   // 미리보기 자동 포인터
+// ✅ 프리뷰(자동 포인터) 로직
 if (t && isPreview) {
+  // 처음 한 번만 프리뷰 종료 시각 세팅
+  if (previewEndTime === null) {
+    previewEndTime = t + PREVIEW_MIN_DURATION;
+  }
+
+  // 자동으로 잉크가 혼자 빙빙 도는 경로
   updateMousePosition(
     (0.5 - 0.45 * Math.sin(0.0015 * t - 2)) * window.innerWidth,
     (0.5 + 0.1 * Math.sin(0.0012 * t) + 0.1 * Math.cos(0.001 * t)) * window.innerHeight
   );
-}
-  if (pointer.moved) {
-    if (!isPreview) pointer.moved = false;
 
-    gl.useProgram(splatProgram.program);
-    gl.uniform1i(splatProgram.uniforms.u_input_texture, velocity.read().attach(1));
-    gl.uniform1f(splatProgram.uniforms.u_ratio, canvasEl.width / canvasEl.height);
-    gl.uniform2f(splatProgram.uniforms.u_point, pointer.x / canvasEl.width, 1 - pointer.y / canvasEl.height);
-    gl.uniform3f(splatProgram.uniforms.u_point_value, pointer.dx, -pointer.dy, 1);
-    gl.uniform1f(splatProgram.uniforms.u_point_size, params.pointerSize);
-    blit(velocity.write());
-    velocity.swap();
-
-    gl.uniform1i(splatProgram.uniforms.u_input_texture, outputColor.read().attach(1));
-    const intensity = 0.3;  // 처음엔 매우 연함
-    gl.uniform3f(
-      splatProgram.uniforms.u_point_value,
-      (1 - params.color.r) * intensity,
-      (1 - params.color.g) * intensity,
-      (1 - params.color.b) * intensity
-    );
-    blit(outputColor.write());
-    outputColor.swap();
+  // ⬇️ 마우스를 이미 움직인 뒤 + 최소 프리뷰 시간 지나면
+  //    이제부터는 진짜 인터랙션 모드로 전환
+  if (hasUserInteracted && t > previewEndTime) {
+    isPreview = false;
   }
+}
+
+if (pointer.moved) {
+  if (!isPreview) pointer.moved = false;
+
+  gl.useProgram(splatProgram.program);
+  gl.uniform1i(splatProgram.uniforms.u_input_texture, velocity.read().attach(1));
+  gl.uniform1f(splatProgram.uniforms.u_ratio, canvasEl.width / canvasEl.height);
+  gl.uniform2f(splatProgram.uniforms.u_point, pointer.x / canvasEl.width, 1 - pointer.y / canvasEl.height);
+  gl.uniform3f(splatProgram.uniforms.u_point_value, pointer.dx, -pointer.dy, 1);
+
+  // ✅ 프리뷰 때는 브러시 조금 더 크게
+  const brushSize = isPreview ? params.pointerSize * 1.1 : params.pointerSize;
+  gl.uniform1f(splatProgram.uniforms.u_point_size, brushSize);
+  blit(velocity.write());
+  velocity.swap();
+
+  gl.uniform1i(splatProgram.uniforms.u_input_texture, outputColor.read().attach(1));
+
+  // ✅ 프리뷰 때는 색 살짝 더 진하게
+  const intensity = isPreview ? 0.6 : 0.3;
+  gl.uniform3f(
+    splatProgram.uniforms.u_point_value,
+    (1 - params.color.r) * intensity,
+    (1 - params.color.g) * intensity,
+    (1 - params.color.b) * intensity
+  );
+  blit(outputColor.write());
+  outputColor.swap();
+}
+
 
   gl.useProgram(divergenceProgram.program);
   gl.uniform2f(divergenceProgram.uniforms.u_texel, velocity.texelSizeX, velocity.texelSizeY);
@@ -372,13 +397,13 @@ function resizeCanvas() {
 function setupEvents() {
   // ✅ PC 마우스: 화면 전체에서 포인터 좌표 받기
   window.addEventListener("mousemove", (e) => {
-    isPreview = false;
+    hasUserInteracted = true; // 진짜로 건드린 적 있음
     updateMousePosition(e.clientX, e.clientY);
   });
 
-  // ✅ 모바일 터치: 마찬가지로 window에서 받기
+  // ✅ 모바일 터치
   window.addEventListener("touchmove", (e) => {
-    isPreview = false;
+    hasUserInteracted = true;
     const t = e.touches[0] || e.targetTouches[0];
     if (!t) return;
     updateMousePosition(t.clientX, t.clientY);

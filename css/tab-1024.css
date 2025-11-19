@@ -115,8 +115,17 @@
     font-size: 0.8rem;
   }
   /* =============project index */
-  .p-title {
-    flex: 1;
+  .tag-chip {
+    border: 1px solid #3d3d3d;
+    text-transform: uppercase;
+    border-radius: 20px;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    /* height: 26px; */
+    /* margin-bottom: 1rem; */
+}
+.p-title {
+    flex: 2;
     display: block;
     flex-direction: column;
     /* align-items: center; */
@@ -134,7 +143,7 @@
   height: 20px !important;
 }
 /* ========detail page */
-.detail-swiper figure{
-  height: 300px;
+.detail-swiper figure {
+    height: 400px;
 }
 }
