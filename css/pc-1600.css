@@ -39,3 +39,9 @@
     align-items: center;
 }
 }
+@media(max-width:1240px){
+    .arrow {
+    width: 150px;
+    left: 10%;
+}
+}

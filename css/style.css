@@ -905,7 +905,7 @@ section{margin-bottom: 10rem;}
   border-left: 1px solid #3d3d3d;
 }
 .project-bar .bar-list li:first-child{
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   border-left: none
 }
 /* ====프로젝트 섹션 헤더 숨김 */

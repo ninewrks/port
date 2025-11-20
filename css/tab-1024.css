@@ -146,4 +146,12 @@
 .detail-swiper figure {
     height: 400px;
 }
+/* =======project */
+.arrow {
+    width: 100px;
+    left: 7%;
+}
+.project-tt {
+    margin-bottom: 1rem;
+}
 }
