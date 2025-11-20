@@ -147,7 +147,7 @@ button{
 
 /* PC 기본 헤더*/
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 100;
@@ -914,38 +914,26 @@ section{margin-bottom: 10rem;}
   --header-height: 80px;
 }
 
-/* header {
-  position: sticky;
+header {
+  position: fixed;
   top: 0;
   width: 100%;
   z-index: 100;
   transition: transform 0.4s ease;
   transform: translateY(0);
-} */
+}
 
-/* project-frame 안에서 기본은 위로 숨김 */
-header.header-hidden {
+/* 인트로에서 숨길 때 */
+header.header-intro-hide {
   transform: translateY(-100%);
 }
 
-/* 상단 hover로 다시 보여줄 때 */
-header.header-hidden.header-show {
+/* 프로젝트에서 아래로 스크롤할 때 숨김 */
+header.header-project-hide {
+  transform: translateY(-100%);
+}
+
+/* 프로젝트에서 위로 스크롤할 때 다시 보임 */
+header.header-project-show {
   transform: translateY(0);
-}
-
-/* 모바일 메뉴 열렸을 때는 무조건 보이게 */
-header.is-open {
-  transform: translateY(0) !important;
-}
-
-/* 스티키 메뉴가 헤더 바로 밑에 붙게 만들고 싶을 때 */
-.project-sticky-menu {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-/* 헤더가 실제로 화면에 보일 때만 header-height 만큼 아래에서 스티키 시작 */
-body.header-visible .project-sticky-menu {
-  top: var(--header-height);
 }

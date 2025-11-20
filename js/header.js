@@ -1,42 +1,75 @@
-// header.js (최종 통합본 + 스티키 클릭 이슈 해결)
 document.addEventListener("DOMContentLoaded", () => {
-  const headerEl = document.querySelector("header");
-  const menuBtn  = document.querySelector(".menu-mo");        // 햄버거 버튼
-  const overlay  = document.querySelector(".menu-overlay");   // 어두운 배경
-  const closeBtn = document.querySelector(".menu-close");     // X 버튼
+  const headerEl      = document.querySelector("header");
+  const menuBtn       = document.querySelector(".menu-mo");
+  const closeBtn      = document.querySelector(".menu-close");
+  const overlay       = document.querySelector(".menu-overlay");
+  const aboutSection  = document.querySelector(".about");
+  const projectFrame  = document.querySelector(".project-frame");
+  const introOverlay  = document.querySelector(".overlay-contents");
 
-  const projectSection = document.querySelector(".project-frame");
-  const stickyMenu = document.querySelector(".project-sticky-menu"); // ⭐ 스티키 메뉴
-  let isOverSticky = false; // ⭐ 스티키 위에 마우스 있는지 여부
+  if (!headerEl || !aboutSection) return;
 
-  // 브레이크포인트 기준 (PC 전용 동작용)
-  const isDesktop = () => window.innerWidth > 1024;
+  const isPC = () => window.innerWidth > 1024;
 
-  /* =========================
-     0. 헤더 높이를 CSS 변수로 반영
-     ========================= */
-  function updateHeaderHeightVar() {
-    if (!headerEl) return;
-    const h = headerEl.offsetHeight || 0;
-    document.documentElement.style.setProperty("--header-height", h + "px");
+  // ===========================
+  // 1) 모바일/태블릿: 햄버거 노출 타이밍
+  //    - 인트로(.overlay-contents) 영역에서는 숨김
+  //    - 인트로 끝난 뒤(= 다음 섹션부터) 보이게
+  // ===========================
+  function updateMobileHamburger() {
+    if (!menuBtn) return;
+
+    if (isPC()) {
+      document.body.classList.remove("show-mobile-menu");
+      headerEl.classList.remove("is-open");
+      if (overlay) overlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+      return;
+    }
+
+    const scrollY = window.scrollY;
+
+    // 인트로의 "끝" 지점 기준
+    let threshold = 0;
+    if (introOverlay) {
+      const introBottom =
+        introOverlay.offsetTop + introOverlay.offsetHeight;
+      threshold = introBottom - 40; // 살짝 여유
+    } else {
+      // 혹시 overlay-contents 없으면 백업: about 시작 지점
+      threshold = aboutSection.offsetTop - 10;
+    }
+
+    if (scrollY >= threshold) {
+      // 인트로 지나간 뒤 → 햄버거 보이기
+      document.body.classList.add("show-mobile-menu");
+    } else {
+      // 인트로 안(탭 인트로 포함) → 햄버거 숨기기 + 메뉴 닫기
+      document.body.classList.remove("show-mobile-menu");
+      headerEl.classList.remove("is-open");
+      if (overlay) overlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+    }
   }
 
-  /* =========================
-     1. 모바일 햄버거 메뉴 열기/닫기
-     ========================= */
-  if (!menuBtn || !headerEl || !overlay || !closeBtn) {
-    console.warn("헤더 메뉴 요소를 찾지 못했습니다.");
-  } else {
-    function openMenu() {
+  // ===========================
+  // 2) 모바일/태블릿: 햄버거 메뉴 열기/닫기
+  // ===========================
+  function openMenu() {
+    if (!isPC()) {
       headerEl.classList.add("is-open");
-      overlay.classList.add("is-open");
+      if (overlay) overlay.classList.add("is-open");
+      document.body.style.overflow = "hidden";
     }
+  }
 
-    function closeMenu() {
-      headerEl.classList.remove("is-open");
-      overlay.classList.remove("is-open");
-    }
+  function closeMenu() {
+    headerEl.classList.remove("is-open");
+    if (overlay) overlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+  }
 
+  if (menuBtn && closeBtn && overlay) {
     menuBtn.addEventListener("click", openMenu);
     closeBtn.addEventListener("click", closeMenu);
     overlay.addEventListener("click", closeMenu);
@@ -46,136 +79,91 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================
-     2. about 섹션 이후부터 햄버거 보이기
-     ========================= */
-  const aboutSection = document.querySelector(".about");
+  // ===========================
+  // 3) PC 전용: 인트로/프로젝트 헤더 동작
+  // ===========================
+  let lastScrollY = window.scrollY;
 
-  function toggleMobileMenuByScroll() {
-    if (!aboutSection) return;
+  function runPCHeaderLogic() {
+    if (!isPC()) {
+      headerEl.classList.remove(
+        "header-intro-hide",
+        "header-project-hide",
+        "header-project-show"
+      );
+      return;
+    }
 
-    const rect = aboutSection.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const scrollY = window.scrollY;
+    const introBottom = introOverlay
+      ? introOverlay.offsetTop + introOverlay.offsetHeight
+      : 0;
 
-    // about 섹션의 top이 화면 높이의 2/3 위로 올라가면 햄버거 노출
-    if (rect.top <= vh * (2 / 3)) {
-      document.body.classList.add("show-mobile-menu");
+    // 인트로 영역에서는 헤더 숨김
+    if (scrollY < introBottom - 40) {
+      headerEl.classList.add("header-intro-hide");
     } else {
-      document.body.classList.remove("show-mobile-menu");
-    }
-  }
-
-  /* =========================
-     3. 헤더가 보이는지 여부 상태 플래그
-        → 스티키 메뉴 top 오프셋에 사용
-     ========================= */
-  function updateHeaderVisibleState() {
-    if (!headerEl) return;
-
-    const isHidden = headerEl.classList.contains("header-hidden");
-    const isShowingByHover = headerEl.classList.contains("header-show");
-
-    // header-hidden이 아니면 기본적으로는 보인다고 판단
-    const actuallyVisible = !isHidden || isShowingByHover;
-
-    document.body.classList.toggle("header-visible", actuallyVisible);
-  }
-
-  /* =========================
-     4. project-frame 구간에서 헤더 숨기기 (PC 전용)
-     ========================= */
-  function toggleHeaderByScroll() {
-    // 헤더가 없으면 그냥 visible 처리만
-    if (!headerEl) {
-      updateHeaderVisibleState();
-      return;
+      headerEl.classList.remove("header-intro-hide");
     }
 
-    // project-frame 자체가 없으면 숨김 로직 스킵, 헤더는 항상 보이는 상태
-    if (!projectSection) {
-      headerEl.classList.remove("header-hidden", "header-show");
-      document.body.classList.remove("in-project-frame");
-      updateHeaderVisibleState();
-      return;
+    let inProject = false;
+    if (projectFrame) {
+      const top = projectFrame.offsetTop;
+      const bottom = top + projectFrame.offsetHeight;
+      inProject = scrollY >= top && scrollY < bottom;
     }
-
-    // PC가 아니면 숨김 기능 끔
-    if (!isDesktop()) {
-      headerEl.classList.remove("header-hidden", "header-show");
-      document.body.classList.remove("in-project-frame");
-      updateHeaderVisibleState();
-      return;
-    }
-
-    const rect = projectSection.getBoundingClientRect();
-    const vh = window.innerHeight || document.documentElement.clientHeight;
-
-    // project-frame이 화면 중앙 근처에 들어왔을 때를 "진입"으로 판단
-    const inProject =
-      rect.top < vh * 0.5 && // 섹션 상단이 화면 중간보다 위에 있고
-      rect.bottom > 80;      // 섹션 하단이 아직 화면 아래에 남아 있을 때
 
     if (inProject) {
-      document.body.classList.add("in-project-frame");
-      headerEl.classList.add("header-hidden");
-      headerEl.classList.remove("header-show");
+      if (scrollY < lastScrollY - 3) {
+        headerEl.classList.add("header-project-show");
+        headerEl.classList.remove("header-project-hide");
+      } else if (scrollY > lastScrollY + 3) {
+        headerEl.classList.add("header-project-hide");
+        headerEl.classList.remove("header-project-show");
+      }
     } else {
-      document.body.classList.remove("in-project-frame");
-      headerEl.classList.remove("header-hidden", "header-show");
+      headerEl.classList.remove("header-project-hide", "header-project-show");
     }
 
-    updateHeaderVisibleState();
+    lastScrollY = scrollY;
   }
 
-  /* =========================
-     5. 스크롤/리사이즈 공통 핸들러
-     ========================= */
-  function onScrollOrResize() {
-    toggleMobileMenuByScroll(); // about 기준으로 햄버거 노출
-    toggleHeaderByScroll();     // project-frame 기준으로 헤더 숨김/보임
-    updateHeaderHeightVar();    // 헤더 높이 갱신
-  }
+  // ===========================
+  // 4) PC: 화면 최상단 호버 시 헤더 보이기
+  // ===========================
+  function handlePCHover(e) {
+    if (!isPC()) return;
+    if (!projectFrame) return;
 
-  // 초기 1회 호출
-  updateHeaderHeightVar();
-  onScrollOrResize();
+    const scrollY = window.scrollY;
+    const top = projectFrame.offsetTop;
+    const bottom = top + projectFrame.offsetHeight;
+    const inProject = scrollY >= top && scrollY < bottom;
 
-  // 이벤트 바인딩
-  window.addEventListener("scroll", onScrollOrResize);
-  window.addEventListener("resize", onScrollOrResize);
-  window.addEventListener("load", updateHeaderHeightVar);
+    if (!inProject) return;
 
-  /* =========================
-     6. 스티키 메뉴 위에 마우스 있을 때 플래그
-     ========================= */
-  if (stickyMenu) {
-    stickyMenu.addEventListener("mouseenter", () => {
-      isOverSticky = true;
-    });
-    stickyMenu.addEventListener("mouseleave", () => {
-      isOverSticky = false;
-    });
-  }
-
-  /* =========================
-     7. 화면 상단 hover 시 헤더 다시 보이게
-        (PC + project-frame 안일 때, 스티키 위에는 건들지 않기)
-     ========================= */
-  document.addEventListener("mousemove", (e) => {
-    if (!headerEl) return;
-    if (!isDesktop()) return;
-    if (!document.body.classList.contains("in-project-frame")) return;
-
-    // ⭐ 스티키 메뉴 위에 있을 땐 헤더 상태 건들지 않음 (점프 방지)
-    if (isOverSticky) return;
-
-    // ⭐ 진짜 맨 위 20px 안쪽에서만 헤더 나게 좁혀줌
-    if (e.clientY < 20) {
-      headerEl.classList.add("header-show");
-    } else {
-      headerEl.classList.remove("header-show");
+    if (e.clientY <= 5) {
+      headerEl.classList.add("header-project-show");
+      headerEl.classList.remove("header-project-hide");
     }
+  }
 
-    updateHeaderVisibleState();
-  });
+  // ===========================
+  // 5) 초기 실행 + 이벤트
+  // ===========================
+  function onScroll() {
+    updateMobileHamburger();
+    runPCHeaderLogic();
+  }
+  function onResize() {
+    updateMobileHamburger();
+    runPCHeaderLogic();
+  }
+
+  updateMobileHamburger();
+  runPCHeaderLogic();
+
+  window.addEventListener("scroll", onScroll);
+  window.addEventListener("resize", onResize);
+  window.addEventListener("mousemove", handlePCHover);
 });
