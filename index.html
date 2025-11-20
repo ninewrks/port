@@ -217,6 +217,20 @@
 
 
   <main class="wide-frame">
+    <header>
+          <!-- ✖ 닫기 버튼 추가 -->
+          <button class="menu-close" aria-label="메뉴 닫기">✕</button>
+        
+          <ul>
+            <li><a href="#">Intro</a></li>
+            <li><a href="#">About me</a></li>
+            <li><a href="#">Skills</a></li>
+            <li class="logo"><img src="./img/slogan.svg" alt="slogan"></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Outro</a></li>
+          </ul>
+        </header>
      <div class="overlay-contents">
         <div class="txt">
           <div class="top">
@@ -241,20 +255,7 @@
 
       </div>
       <div class="long-wrap">
-        <header>
-          <!-- ✖ 닫기 버튼 추가 -->
-          <button class="menu-close" aria-label="메뉴 닫기">✕</button>
         
-          <ul>
-            <li><a href="#">Intro</a></li>
-            <li><a href="#">About me</a></li>
-            <li><a href="#">Skills</a></li>
-            <li class="logo"><img src="./img/slogan.svg" alt="slogan"></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Outro</a></li>
-          </ul>
-        </header>
         <div class="common-frame">
           <button class="menu-mo" aria-label="메뉴 열기">
             <img src="./img/Menu.svg" alt="menu">
@@ -1280,25 +1281,27 @@
       <section class="project-frame">
         <!-- <div class="project-box"> -->
           <!-- <img class="slogan-pp" src="./img/slogan-w.svg" alt=""> -->
-          <div class="bb-bar">
-            <div class="project-bb">
-              <img src="./img/Union.svg" alt="화살표">
-              <ul class="project-sticky-menu">
-                <li><h4>Project InScent</h4></li>
-                <li class="link-item">
-                  <a href="https://..." target="_blank">
-                    Branding Website
-                    <span class="arrow-icon">↗</span>
-                  </a>
-                </li>
-                <li class="link-item">
-                  <a href="https://..." target="_blank">
-                    Figma Prototype
-                    <span class="arrow-icon">↗</span>
-                  </a>
-                </li>          
-              </ul>
-            </div>
+          <div class="project-tt">
+            <button type="button" class="tag-chip">Web · UI <sup>5</sup></button>
+            <h3>Web <span>Production</span></h3>
+          </div>
+           <img class="arrow" src="./img/Union.svg" alt="화살표">      
+           <ul class="project-sticky-menu">
+             <li class="link-item">
+               <a href="https://..." target="_blank">
+                 Branding Website
+                 <span class="arrow-icon">↗</span>
+               </a>
+             </li>
+             <li class="link-item">
+               <a href="https://..." target="_blank">
+                 Figma Prototype
+                 <span class="arrow-icon">↗</span>
+               </a>
+             </li>          
+           </ul>  
+        
+            
             <div class="project-bar">
               <ul class="bar-list">
                 <li><span>UI/UX Design & Web Publishing</span></li>
@@ -1308,14 +1311,13 @@
                 <li><a href="mailto:ninewrks@gmail.com">ninewrks@gmail.com <span class="arrow-icon">↗</span></a></li>
               </ul>
             </div>
-          </div>
           <figure class="project-img">
-                    <!-- 상세이미지 -->
-                    <picture>
-                      <source media="max-width:768px" srcset="이미지 상대 경로">
-                      <img src="./img/project.jpg" alt="프로젝트 상세이미지">
-                    </picture>
-                  </figure>
+            <!-- 상세이미지 -->
+            <picture>
+              <source media="max-width:768px" srcset="이미지 상대 경로">
+              <img src="./img/project.jpg" alt="프로젝트 상세이미지">
+            </picture>
+            </figure>
         </div>
 
         
