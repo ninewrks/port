@@ -30,6 +30,7 @@ button{
 
   .long-wrap {
     /* height: 400vh; */
+    width: 100%;
     z-index: 5;
     position: relative;
     pointer-events: auto;
@@ -798,4 +799,135 @@ section{margin-bottom: 10rem;}
 .back p{
   text-align: center;
   color: #fffbdb;
+}
+/*================== 전체 박스 */
+.project-frame {
+  display: flex;
+  align-items: stretch;  
+  flex-direction: column
+}
+.project-box {
+  /* background: #000000;     */
+  color: #000000;
+  padding: 4rem 6rem;
+  display: flex;
+}
+/* 슬로건 이미지 (좌상단) */
+.slogan-pp {
+    display: flex;
+    align-self: self-end;
+    max-width: 150px;
+    margin-right: 3rem;
+}
+
+/* 가운데 영역: 화살표 + 프로젝트 링크 리스트 */
+.project-bb {
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+    padding-top: 3rem;
+    /* background: #000; */
+    color: #000000;
+    padding-left: 14rem;
+}
+/* 왼쪽 화살표 이미지 */
+.project-bb > img {
+  width: 200px;   /* 레퍼런스처럼 크게 보이게 */
+  height: auto;
+}
+
+/* 오른쪽 텍스트/링크 묶음 */
+.project-sticky-menu {
+  position: sticky;
+  top: 120px;   /* 헤더 바로 아래쯤에 붙게 */
+  z-index: 5;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-width: 320px;
+}
+
+/* 첫 번째 li: 프로젝트 타이틀 */
+.project-sticky-menu > li:first-child h4 {
+    font-family: 'newyork';
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+/* 링크 리스트 공통 */
+.link-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+}
+
+.link-item a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.9rem 0 0.7rem;
+    font-size: 1.05rem;
+    color: #000000;
+    /* background: #000; */
+}
+
+/* 화살표 아이콘 */
+.arrow-icon {
+  display: inline-block;
+  font-size: 1rem;
+  transform: translateY(1px);
+}
+
+/* 호버 시 살짝 연해지게 */
+.link-item a:hover {
+  opacity: 0.7;
+}
+
+/* ====== 아래 정보 바 ====== */
+
+.project-bar {
+    padding-top: 5.5rem;
+    /* background: #000; */
+    color: #000000;
+    position: sticky;
+    top: 0rem;
+}
+
+.bar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  border-bottom: 1px solid #000000;
+  border-top: 1px solid #000000;
+  border-bottom-width: 1px;
+}
+
+/* 각 칸 */
+.bar-list li {
+  flex: 1;
+  padding: 0.7rem 1.4rem;
+  border-left: 1px solid #000000;
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+}
+
+/* 첫 칸은 왼쪽 라인 제거 */
+.bar-list li:first-child {
+  border-left: none;
+}
+
+/* 텍스트/링크 공통 스타일 */
+.bar-list span,
+.bar-list a {
+  text-decoration: none;
+  color: #000000;
+  white-space: nowrap;   /* 한 줄 유지하고 싶으면 */
+}
+
+/* 호버 시 */
+.bar-list a:hover {
+  opacity: 0.7;
 }
