@@ -222,16 +222,23 @@
           <button class="menu-close" aria-label="메뉴 닫기">✕</button>
         
           <ul>
-            <li><a href="#">Intro</a></li>
-            <li><a href="#">About me</a></li>
-            <li><a href="#">Skills</a></li>
+            <li><a href="#intro">Intro</a></li>
+            <li><a href="#about">About me</a></li>
+            <li><a href="#skills">Skills</a></li>
             <li class="logo"><img src="./img/slogan.svg" alt="slogan"></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Outro</a></li>
+            <li><a href="#project">Projects</a></li>
+            <li class="nav-contact has-dropdown">
+              <a href="#">Contact</a>
+                <ul class="dropdown">
+                  <li><a href="tel:01073136535">Phone</a></li>
+                  <li><a href="mailto:ninewrks@gmail.com">Email</a></li>
+                  <li><a href="./img/resume_kooyeonseo.pdf" target="_blank">Resume</a></li>
+                </ul>
+            </li>
+            <li><a href="#outro">Outro</a></li>
           </ul>
         </header>
-     <div class="overlay-contents">
+     <div class="overlay-contents" id="intro">
         <div class="txt">
           <div class="top">
               <div class="job">
@@ -263,7 +270,7 @@
           <div class="menu-overlay"></div>
         
           
-          <section class="about">
+          <section class="about" id="about">
               <div class="about-t">
                 <h1>about</h1>
                 <div class="t1">
@@ -321,7 +328,7 @@
             </dl>
           </div>
           </section>
-          <section class="skills">
+          <section class="skills" id="skills">
             <h1>skills</h1>
             <p>다양한 툴을 활용해 아이디어를 실체화하며, 디자인의 감성과 구조의 완성도를 함께 잡습니다. <br>
               사용자의 흐름과 경험을 고려해 자연스럽게 이어지는 화면을 구현합니다.</p>
@@ -420,7 +427,7 @@
               <div class="swiper-pagination"></div>
             </div>
           </section>
-          <section class="project-intro">
+          <section class="project-intro" id="project">
             <h1>Project index</h1>
             <ul class="project-ul">
               <li class="project-li">
@@ -488,7 +495,7 @@
                 </a>
               </li>
               <li class="project-li">
-                <a href="#">
+                <a href="#details">
                   <button type="button" class="tag-chip">Product <sup>4</sup></button>
                   <div class="project-txt">
                     <div class="p-title">
@@ -506,20 +513,25 @@
                 </a>
               </li>
               <li class="project-li">
+                
                 <button type="button" class="tag-chip">Web · UI <sup>5</sup></button>
                 <div class="project-txt">
+                  <a href="#project-1">
                   <div class="p-title">
                     <h3>Web Production</h3>
                     <p>디자인을 웹으로 구현한 프로젝트입니다. 디자인부터
                       HTML/CSS 퍼블리싱까지 전체 웹 화면을 직접 제작했습니다.</p>
+                    </a>
                   </div>
+                
                   <ul class="project-d-ul">
-                    <li>Inscent</li>
-                    <li>Bakeup</li>
+                    <li><a href="#project-1">Inscent</a></li>
+                    <li><a href="#project-2">Bakeup</a></li>
                   </ul>
                 </div>
               </li>
               <li class="project-li-last">
+                <a href="#archive">
                 <div class="project-txt">
                   <div class="project-etc">
                     <button type="button" class="tag-chip" id="other-tag">Creative<sup>etc</sup></button>
@@ -533,6 +545,7 @@
                     <li>Textile Design</li>
                   </ul>
                 </div>
+                </a>
               </li>
             
             </ul>
@@ -1278,12 +1291,51 @@
       </div>
       <!--=======================
       ===================== 프로젝트 -->
-      <section class="project-frame">
+      <section class="project-frame" id="project-1">
         <!-- <div class="project-box"> -->
           <!-- <img class="slogan-pp" src="./img/slogan-w.svg" alt=""> -->
           <div class="project-tt">
             <button type="button" class="tag-chip">Web · UI <sup>5</sup></button>
-            <h3>Web <span>Production</span></h3>
+            <h3>Web <span>Production 1</span></h3>
+          </div>
+           <img class="arrow" src="./img/Union.svg" alt="화살표">      
+           <ul class="project-sticky-menu">
+             <li class="link-item">
+               <a href="https://teaminscent.dothome.co.kr" target="_blank">
+                 Branding Website
+                 <span class="arrow-icon">↗</span>
+               </a>
+             </li>
+             <li class="link-item">
+               <a href="https://www.figma.com/proto/0qyeiJ8jSOGiQam5qz00aX/%EC%9D%B8%EC%84%BC%ED%8A%B8-InScent?node-id=0-1&t=JGnECS0qjw0Mm94E-1" target="_blank">
+                 Figma Prototype
+                 <span class="arrow-icon">↗</span>
+               </a>
+             </li>          
+           </ul>  
+            <div class="project-bar">
+              <ul class="bar-list">
+                <li><span>UI/UX Design & Web Publishing</span></li>
+                <li><span>2025.11</span></li>
+                <li><span>Team Project</span></li>
+                <li><a href="tel:+821073136535">+82 10 7313 6535 <span class="arrow-icon">↗</span></a></li>
+                <li><a href="mailto:ninewrks@gmail.com">ninewrks@gmail.com <span class="arrow-icon">↗</span></a></li>
+              </ul>
+            </div>
+          <figure class="project-img">
+            <!-- 상세이미지 -->
+            <picture>
+              <source media="(max-width: 768px)" srcset="./img/project-d1-mo.jpg">
+              <img src="./img/project-d1.jpg" alt="프로젝트 상세이미지">
+            </picture>
+            </figure>
+      </section>
+      <section class="project-frame" id="project-2">
+        <!-- <div class="project-box"> -->
+          <!-- <img class="slogan-pp" src="./img/slogan-w.svg" alt=""> -->
+          <div class="project-tt">
+            <button type="button" class="tag-chip">Web · UI <sup>5</sup></button>
+            <h3>Web <span>Production 2</span></h3>
           </div>
            <img class="arrow" src="./img/Union.svg" alt="화살표">      
            <ul class="project-sticky-menu">
@@ -1306,7 +1358,7 @@
               <ul class="bar-list">
                 <li><span>UI/UX Design & Web Publishing</span></li>
                 <li><span>2025.11</span></li>
-                <li><span>Team Project</span></li>
+                <li><span>Personal Project</span></li>
                 <li><a href="tel:+821073136535">+82 10 7313 6535 <span class="arrow-icon">↗</span></a></li>
                 <li><a href="mailto:ninewrks@gmail.com">ninewrks@gmail.com <span class="arrow-icon">↗</span></a></li>
               </ul>
@@ -1314,19 +1366,16 @@
           <figure class="project-img">
             <!-- 상세이미지 -->
             <picture>
-              <source media="(max-width: 768px)" srcset="./img/project-d1-mo.jpg">
-              <img src="./img/project-d1.jpg" alt="프로젝트 상세이미지">
+              <source media="(max-width: 768px)" srcset="./img/project-d2-mo.jpg">
+              <img src="./img/project-d2.jpg" alt="프로젝트 상세이미지">
             </picture>
             </figure>
-        </div>
-
-        
-        
       </section>      
+         
       <!-- =====================
            ================아더아카이브 -->
           <div class="common-frame">
-            <section class="archive">
+            <section class="archive" id="archive">
             <div class="a-project-txt">
               <div class="a-project-etc">
                 <button type="button" class="tag-chip" id="other-tag">Creative<sup>etc</sup></button>
@@ -1393,7 +1442,7 @@
 </div>
       
   </main>
-  <section class="footer">
+  <section class="footer" id="outro">
     <div class="end-banner">
       <div class="end-track">
         <span>Thank you for reaching the end — may the next page be even clearer.</span>
@@ -1409,6 +1458,10 @@
       <img class="b-logo" src="./img/slogan-w.svg" alt="로고">
       <p>Thank you for your time and attention. <br> I look forward to designing meaningful experiences ahead.</p>
       <p>끝까지 봐주셔서 감사합니다. <br> 다음 페이지는 더 선명하게 채워가겠습니다.</p>
+        <ul class="f-contect">
+          <li><a href="tel:+821073136535">+82 10 7313 6535 <span class="arrow-icon">↗</span></a></li>
+          <li><a href="mailto:ninewrks@gmail.com">ninewrks@gmail.com <span class="arrow-icon">↗</span></a></li>
+        </ul>
     </div>
   </section>
  

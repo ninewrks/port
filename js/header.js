@@ -4,17 +4,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeBtn      = document.querySelector(".menu-close");
   const overlay       = document.querySelector(".menu-overlay");
   const aboutSection  = document.querySelector(".about");
-  const projectFrame  = document.querySelector(".project-frame");
   const introOverlay  = document.querySelector(".overlay-contents");
+
+  // ⬇⬇⬇ 여기! 단일 frame → 여러 개 frames 로 변경
+  const projectFrames = document.querySelectorAll(".project-frame");
 
   if (!headerEl || !aboutSection) return;
 
   const isPC = () => window.innerWidth > 1024;
 
+  // --------------------------------
+  // 공통: 현재 스크롤이 어떤 project-frame 영역 안에 있는지 체크
+  // --------------------------------
+  function getProjectState(scrollY) {
+    if (!projectFrames || projectFrames.length === 0) {
+      return { inProject: false, firstTop: 0, lastBottom: 0 };
+    }
+
+    let inProject = false;
+    let firstTop = projectFrames[0].offsetTop;
+    let lastBottom = firstTop + projectFrames[0].offsetHeight;
+
+    projectFrames.forEach((frame) => {
+      const top = frame.offsetTop;
+      const bottom = top + frame.offsetHeight;
+
+      if (top < firstTop) firstTop = top;
+      if (bottom > lastBottom) lastBottom = bottom;
+
+      if (scrollY >= top && scrollY < bottom) {
+        inProject = true;
+      }
+    });
+
+    return { inProject, firstTop, lastBottom };
+  }
+
   // ===========================
   // 1) 모바일/태블릿: 햄버거 노출 타이밍
-  //    - 인트로(.overlay-contents) 영역에서는 숨김
-  //    - 인트로 끝난 뒤(= 다음 섹션부터) 보이게
   // ===========================
   function updateMobileHamburger() {
     if (!menuBtn) return;
@@ -29,22 +56,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const scrollY = window.scrollY;
 
-    // 인트로의 "끝" 지점 기준
     let threshold = 0;
     if (introOverlay) {
       const introBottom =
         introOverlay.offsetTop + introOverlay.offsetHeight;
-      threshold = introBottom - 40; // 살짝 여유
+      threshold = introBottom - 40;
     } else {
-      // 혹시 overlay-contents 없으면 백업: about 시작 지점
       threshold = aboutSection.offsetTop - 10;
     }
 
     if (scrollY >= threshold) {
-      // 인트로 지나간 뒤 → 햄버거 보이기
       document.body.classList.add("show-mobile-menu");
     } else {
-      // 인트로 안(탭 인트로 포함) → 햄버거 숨기기 + 메뉴 닫기
       document.body.classList.remove("show-mobile-menu");
       headerEl.classList.remove("is-open");
       if (overlay) overlay.classList.remove("is-open");
@@ -106,12 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
       headerEl.classList.remove("header-intro-hide");
     }
 
-    let inProject = false;
-    if (projectFrame) {
-      const top = projectFrame.offsetTop;
-      const bottom = top + projectFrame.offsetHeight;
-      inProject = scrollY >= top && scrollY < bottom;
-    }
+    // ⬇⬇⬇ 여러 project-frame 기준으로 inProject 판별
+    const { inProject } = getProjectState(scrollY);
 
     if (inProject) {
       if (scrollY < lastScrollY - 3) {
@@ -133,12 +152,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===========================
   function handlePCHover(e) {
     if (!isPC()) return;
-    if (!projectFrame) return;
+    if (!projectFrames || projectFrames.length === 0) return;
 
     const scrollY = window.scrollY;
-    const top = projectFrame.offsetTop;
-    const bottom = top + projectFrame.offsetHeight;
-    const inProject = scrollY >= top && scrollY < bottom;
+    const { inProject } = getProjectState(scrollY);
 
     if (!inProject) return;
 
@@ -167,3 +184,23 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", onResize);
   window.addEventListener("mousemove", handlePCHover);
 });
+// CONTACT dropdown
+const contact = document.querySelector('.nav-contact');
+const dropdown = contact?.querySelector('.dropdown');
+
+if (contact && dropdown) {
+  contact.addEventListener('click', (e) => {
+    // 드롭다운 내부 링크(a)를 클릭했을 때는 기본 동작 유지
+    if (e.target.closest('.dropdown')) {
+      return; // preventDefault 실행 안 함 → PHONE/EMAIL/RESUME 정상 동작
+    }
+
+    e.preventDefault();
+    e.stopPropagation();
+    dropdown.classList.toggle('show');
+  });
+
+  document.addEventListener('click', () => {
+    dropdown.classList.remove('show');
+  });
+}

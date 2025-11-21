@@ -937,3 +937,53 @@ header.header-project-hide {
 header.header-project-show {
   transform: translateY(0);
 }
+.nav-contact .dropdown {
+  display: none;
+}
+
+.nav-contact .dropdown.show {
+  display: flex;
+}
+
+/* ====contact 드롭다운 */
+.nav-contact {
+  position: relative;
+}
+
+.nav-contact .dropdown {
+    position: absolute;
+    top: 300%;
+    right: -75%;
+    /* transform: translateX(-50%); */
+    padding: 0.8rem 0;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s ease,
+    opacity 0.25s ease;
+}
+.nav-contact .dropdown.show {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* 내부 항목 */
+.nav-contact .dropdown li a {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #2055ca;
+    white-space: nowrap;
+    background: rgb(255, 255, 255);
+    transition: background 0.2s ease;
+    border-radius: 69px;
+}
+.f-contect{
+  color: #fff;
+  font-size: 0.8rem;
+}
+
