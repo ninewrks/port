@@ -116,6 +116,9 @@
     padding-right: 2rem;
     font-size: 0.8rem;
 }
+.p-title {
+    margin-right: 0;
+}
 /* ===============project-index */
 /* .project-txt {
     flex-direction: column;

@@ -38,6 +38,9 @@
     flex-direction: column;
     align-items: center;
 }
+.project-txt .project-a {
+    flex-direction: column;
+}
 }
 @media(max-width:1240px){
     .arrow {
