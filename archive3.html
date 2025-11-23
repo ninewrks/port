@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/archive.css">
+    
 </head>
-    <section class="archive-section" id="character">
+<body>
+  <div class="wide-frame">
+    <div class="common-frame">
+        <section class="archive-section" id="legacy-2023">
         <button type="button" class="tag-chip" id="other-tag">
           Creative<sup>etc</sup>
         </button>
@@ -19,16 +23,87 @@
         UI 구성, 레이아웃, 타이포그래피 등 가장 기본적인 요소부터 하나씩 배우며 만든 결과물로,
         지금의 작업 방식과 디자인 방향성이 형성되기 시작한 출발점이 된 작업들입니다.
         초기 작업이지만 당시의 고민과 시도를 확인할 수 있는 포트폴리오입니다.
+        (웹에서 적합한 환경으로 보실수있습니다.)
         </p>
     </section>
+    </div>
     <section>
         <figure class="project-img">
             <!-- 상세이미지 -->
             <picture>
               <!-- <source media="(max-width: 768px)" srcset="./img/project-d2-mo.jpg"> -->
-              <img src="./" alt="프로젝트 상세이미지">
+              <img src="./img/arc3/Legacy_intro.jpg" alt="2023 포트폴리오">
             </picture>
+            <div class="index-frame" id="legacy-index">
+                <img class="index-pp" src="./img/arc3/index.jpg" alt="2023 포트폴리오">
+              <ul class="index-box">
+                <li><a href="#app"><img src="./img/arc3/p1.jpg" alt="2023인덱스"></a></li>
+                <li><a href="#web"><img src="./img/arc3/p2.jpg" alt="2023인덱스"></a></li>
+                <li><a href="#event"><img src="./img/arc3/p3.jpg" alt="2023인덱스"></a></li>
+              </ul>
+            </div>
+            <picture>
+              <img id="app" src="./img/arc3/Legacy_app01.jpg" alt="2023 포트폴리오앱">
+              <img src="./img/arc3/Legacy_app02.jpg" alt="2023 포트폴리오앱">
+              <img id="web" src="./img/arc3/Legacy_web01.jpg" alt="2023 포트폴리오웹">
+              <img src="./img/arc3/Legacy_web02.jpg" alt="2023 포트폴리오웹">
+              <img src="./img/arc3/Legacy_web03.jpg" alt="2023 포트폴리오웹">
+              <img id="event" src="./img/arc3/Legacy_event01.jpg" alt="2023포트폴리오 이벤트">
+            </picture>
+            
+          
         </figure>
     </section>
-<body>
+  </div> 
+<!-- 🔹 플로팅 네비 버튼 -->
+<div class="floating-btns" id="legacy-floating">
+  <button type="button" class="btn-to-index" aria-label="2023 인덱스로 이동">
+    INDEX
+  </button>
+  <button type="button" class="btn-to-top" aria-label="페이지 상단으로 이동">
+    TOP
+  </button>
+</div>
+<script>
+  // 🔹 요소 찾기
+const floating = document.getElementById('legacy-floating');
+const legacySection = document.getElementById('legacy-2023');
+const legacyIndex = document.getElementById('legacy-index');
+const btnTop = document.querySelector('.btn-to-top');
+const btnIndex = document.querySelector('.btn-to-index');
+
+// 🔹 스크롤할 때 보여줄지 말지 결정
+window.addEventListener('scroll', function () {
+  if (!legacySection || !floating) return;
+
+  const triggerPoint = legacySection.offsetTop - 200; // 이 위치 이후부터 보이게
+  if (window.scrollY > triggerPoint) {
+    floating.classList.add('show');
+  } else {
+    floating.classList.remove('show');
+  }
+});
+
+// 🔹 TOP 버튼: 맨 위로
+if (btnTop) {
+  btnTop.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+}
+
+// 🔹 INDEX 버튼: 인덱스 썸네일 영역으로
+if (btnIndex && legacyIndex) {
+  btnIndex.addEventListener('click', function () {
+    legacyIndex.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center'
+    });
+  });
+}
+
+</script>
 </body>
+</html>

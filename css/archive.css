@@ -105,6 +105,77 @@
   background: none;
   cursor: pointer;
 }
+.index-frame{
+  background: #DCFFFF;
+  width: 1920px;
+  height: 1080px;
+}
+.index-box{
+  display: flex;
+  gap: 6rem;
+  justify-content: center;
+  
+}
+/* 전체 페이지 앵커 이동 부드럽게 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 플로팅 버튼 기본 박스 */
+.floating-btns {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* 보일 때 상태 */
+.floating-btns.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* 각 버튼 스타일 */
+.floating-btns button {
+  min-width: 3.2rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.4);
+  background: rgba(15,15,15,0.7);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* 호버 */
+.floating-btns button:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* 모바일에서는 조금 위/작게 */
+@media (max-width: 768px) {
+  .floating-btns {
+    right: 1.2rem;
+    bottom: 1.5rem;
+  }
+
+  .floating-btns button {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.65rem;
+  }
+}
+
 @media (min-width:2000px){
   .wide-frame {
     width: 1920px;
