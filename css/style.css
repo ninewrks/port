@@ -782,7 +782,7 @@ section{margin-bottom: 10rem;}
 /* .footer{margin: 1rem;} */
 .back {
     background-color: var(--deep);
-    height: 500px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
