@@ -38,9 +38,10 @@
 .archive-section h2{
   margin-bottom: 1rem;
 }
-.archive-section p{
-  width:30rem;
-  margin-bottom: 6rem;
+.archive-section p {
+    width: 30rem;
+    line-height: 1.6;
+    margin-bottom: 6rem;
 }
 .char-gallery img {
   width: 100%;

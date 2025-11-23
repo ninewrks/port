@@ -238,9 +238,6 @@
 .arrow {
     display: none;
 }
-.project-etc{
-    margin-right: 1rem;
-}
 }
 @media(max-width:320px){
     .project-txt {

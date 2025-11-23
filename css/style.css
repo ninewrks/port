@@ -505,7 +505,9 @@ font-weight: 600;
 #other-tag{
   font-size: 0.5rem;
 }
-
+.project-etc{
+    margin-right: 1rem;
+}
 /* ============project pop-up*/
 /* index 설정 */
 #pop-up,#poster {
@@ -918,14 +920,14 @@ section{margin-bottom: 10rem;}
   /* JS에서 실제 header 높이로 덮어쓸 예정 */
   --header-height: 80px;
 }
-
 header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-  transition: transform 0.4s ease;
-  transform: translateY(0);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: transform 0.4s ease;
+    transform: translateY(0);
 }
 
 /* 인트로에서 숨길 때 */
