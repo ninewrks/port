@@ -53,7 +53,7 @@ let isPreview = true;
 // ✅ 프리뷰(자동 윙윙) 유지 관련 상태
 let hasUserInteracted = false; // 진짜로 마우스/터치가 움직였는지
 let previewEndTime = null;     // 프리뷰 종료 시각 (ms)
-const PREVIEW_MIN_DURATION = 5500; // 최소 5.5초는 혼자 돈다
+const PREVIEW_MIN_DURATION = 3500; // 최소 5.5초는 혼자 돈다
 
 const gl = canvasEl.getContext("webgl");
 gl.getExtension("OES_texture_float");
