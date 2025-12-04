@@ -78,6 +78,9 @@
   }
 
   /* =============about=========== */
+  .koo2 {
+    bottom: -3rem;
+}
   .koo img{
       width: 300px;
       aspect-ratio: 600/752;
