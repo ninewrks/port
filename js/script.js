@@ -27,14 +27,14 @@ const fontOptions = {
 const params = {
   fontName: 'zal',
   isBold: false,
-  fontSize: 180, // responsive=false일 때 수동 폰트
+  fontSize: 300, // responsive=false일 때 수동 폰트
   text: "Ink",
   pointerSize: null,
   color: {  r: 0.40, g: 0.75, b: 1.0  },
   // ✅ Responsive font
   responsive: true,
   minFont: 70,     // px (모바일 기준 최소)
-  maxFont: 180,    // px (데스크톱 기준 최대)
+  maxFont: 300,    // px (데스크톱 기준 최대)
   fromWidth: 360,  // 이 너비에서 minFont
   toWidth: 1440    // 이 너비에서 maxFont
 };
@@ -293,7 +293,7 @@ if (pointer.moved) {
   gl.uniform3f(splatProgram.uniforms.u_point_value, pointer.dx, -pointer.dy, 1);
 
   // ✅ 프리뷰 때는 브러시 조금 더 크게
-  const brushSize = isPreview ? params.pointerSize * 1.1 : params.pointerSize;
+  const brushSize = isPreview ? params.pointerSize * 1.5 : params.pointerSize;
   gl.uniform1f(splatProgram.uniforms.u_point_size, brushSize);
   blit(velocity.write());
   velocity.swap();
