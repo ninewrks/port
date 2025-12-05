@@ -293,7 +293,7 @@ if (pointer.moved) {
   gl.uniform3f(splatProgram.uniforms.u_point_value, pointer.dx, -pointer.dy, 1);
 
   // ✅ 프리뷰 때는 브러시 조금 더 크게
-  const brushSize = isPreview ? params.pointerSize * 1.5 : params.pointerSize;
+  const brushSize = isPreview ? params.pointerSize * 1.4 : params.pointerSize;
   gl.uniform1f(splatProgram.uniforms.u_point_size, brushSize);
   blit(velocity.write());
   velocity.swap();
