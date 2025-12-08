@@ -10,7 +10,7 @@
 @media(max-width:1440px){
   /* ========header======= */
   header ul {
-    gap: 3rem;
+    gap: 1rem;
 }
     .skills h1{
       font-size: 5rem;
