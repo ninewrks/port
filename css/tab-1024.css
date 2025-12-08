@@ -76,6 +76,28 @@
     opacity: 1;
     pointer-events: auto;
   }
+    /* ⭐⭐ 여기 추가 ⭐⭐ */
+/* 🔹기본: 닫힌 상태 (공간 0) */
+.nav-contact {
+  position: static;
+}
+
+.nav-contact .dropdown {
+  position: static;
+  display: none;      /* ← 기본은 안 보이게 */
+  margin-top: 0;      /* ← 여백 없애기 */
+  padding-left: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* 🔹CONTACT 눌러서 열렸을 때 */
+.nav-contact.is-open .dropdown {
+  display: block;     /* 이때만 보이게 */
+  margin-top: 0.4rem; /* CONTACT 아래 살짝 띄우기 */
+  padding-left: 1rem; /* 살짝 들여쓰기 */
+}
+
 
   /* =============about=========== */
   .koo2 {
