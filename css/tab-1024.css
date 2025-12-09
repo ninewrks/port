@@ -19,7 +19,7 @@
 
   /* 🔹기본: 숨김 */
   .menu-mo {
-    display: none;           /* ⬅⬅⬅ 이걸 none 으로 */
+    display: block;         
     position: fixed;
     top: 16px;
     right: 16px;
