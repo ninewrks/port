@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!headerEl || !aboutSection) return;
 
-  const isPC = () => window.innerWidth > 1024;
+  const isPC = () => window.innerWidth > 1200;
 
   // --------------------------------
   // 공통: 현재 스크롤이 어떤 project-frame 영역 안에 있는지 체크
