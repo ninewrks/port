@@ -9,9 +9,9 @@
 }
 @media(max-width:1440px){
   /* ========header======= */
-  header {
+  /* header {
     padding: 0.5rem 2rem;
-}
+} */
 
   header ul {
     gap: 1rem;
