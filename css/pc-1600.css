@@ -6,6 +6,9 @@
     padding-left: 2rem;
     grid-template-columns: 1fr;
 }
+.menu-sticy-area{
+    display: none;;
+}
 }
 @media(max-width:1440px){
   /* ========header======= */

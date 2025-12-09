@@ -2,6 +2,25 @@
   html{
       font-size: 16px;
   }
+
+.menu-sticy-area {
+    display: flex;
+    justify-content: flex-end;
+    position: sticky;
+    left: 0;
+    top: 0;
+    /* border: 1px solid red; */
+    padding: 1rem;
+}
+
+.menu-mo {
+    display: block;         
+    /* position: fixed; */
+    /* top: 16px; */
+    /* right: 16px; */
+    z-index: 999;
+  }
+
 .wide-frame {
   width: auto;
 }
@@ -18,13 +37,7 @@
   /* ====== header ====== */
 
   /* 🔹기본: 숨김 */
-  .menu-mo {
-    display: block;         
-    position: fixed;
-    top: 16px;
-    right: 16px;
-    z-index: 999;
-  }
+  
 
   /* 🔹about 섹션 이후부터 보여줄 때 */
   body.show-mobile-menu .menu-mo {
