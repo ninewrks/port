@@ -100,6 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
       headerEl.classList.add("is-open");
       overlay?.classList.add("is-open");
       document.body.style.overflow = "hidden";
+      menuBtn?.classList.add("is-hidden");
     }
   }
 
@@ -107,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     headerEl.classList.remove("is-open");
     overlay?.classList.remove("is-open");
     document.body.style.overflow = "";
+    menuBtn?.classList.remove("is-hidden");
   }
 
   if (menuBtn && closeBtn && overlay) {

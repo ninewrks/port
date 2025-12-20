@@ -1007,14 +1007,14 @@ header a {
   position: relative;
 }
 
-/* dropdown 기본 상태 */
+/* dropdown 컨테이너 (배경 없음) */
 .nav-contact .dropdown {
   position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
+  top: calc(100% + 50px);
+  right: -50px;
 
   margin: 0;
-  padding: 0.6rem;
+  padding: 0; /* 🔹 패널 느낌 제거 */
   list-style: none;
 
   display: flex;
@@ -1023,13 +1023,11 @@ header a {
 
   min-width: 180px;
 
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 16px;
+  background: transparent; /* 🔹 ul 배경 제거 */
+  border-radius: 0;
 
-  opacity: 0;
   transform: translateY(-6px);
+  opacity: 0;
   pointer-events: none;
 
   transition: opacity 0.2s ease, transform 0.2s ease;
@@ -1042,15 +1040,36 @@ header a {
   pointer-events: auto;
 }
 
+/* 개별 아이템 */
+.nav-contact .dropdown li {
+  display: flex;
+}
+
+/* ⭐ 각 메뉴 버튼처럼 보이게 */
 .nav-contact .dropdown li a {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content; /* 🔹 글자만큼만 배경 */
+  padding: 0.45rem 0.9rem;
+
   font-size: 0.7rem;
   font-weight: 500;
   color: #2055ca;
   text-transform: none;
-  padding: 0.45rem 0.9rem;
-  border-radius: 999px;
   white-space: nowrap;
+
+  background: rgba(255, 255, 255, 0.5); /* ⭐ 개별 배경 */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  border-radius: 999px; /* ⭐ pill shape */
+
+  transition: background 0.2s ease, transform 0.15s ease;
 }
+
+/* hover 효과 */
 .nav-contact .dropdown li a:hover {
-  background: rgba(32, 85, 202, 0.08);
+  background: rgba(32, 85, 202, 0.12);
+  transform: translateY(-1px);
 }
