@@ -752,6 +752,11 @@ section {
   opacity: 0.85;
   display: inline-block;
 }
+.f-contect {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #b3dfff;
+}
 
 /* 슬라이드 애니메이션 */
 @keyframes slide {
