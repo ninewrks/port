@@ -61,7 +61,7 @@
 
       transform: translateX(100%);
       transition: transform 0.3s ease;
-      z-index: 100000;
+      z-index: 1000;
     }
 
     header.is-open {
@@ -109,7 +109,7 @@
       top: 14px;
       right: 14px;
 
-      z-index: 500001; /* ✅ overlay/header보다 위 */
+      z-index: 1000; /* ✅ overlay/header보다 위 */
       width: 52px; /* ✅ 터치 영역 크게 */
       height: 52px;
 

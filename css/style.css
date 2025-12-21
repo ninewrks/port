@@ -634,7 +634,7 @@ header ul li {
   margin: 5vh auto;
   background: #fff;
   padding: 4rem 3rem;
-  z-index: 1;
+  z-index: 1000000;
   max-height: 90vh;
   overflow: hidden;
 }
